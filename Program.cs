@@ -14,6 +14,7 @@ namespace AlgorithmComparisonEngine
                 _ = new DataStorageFiller();
                 bool repeat;
                 bool ascending;
+                bool compare;
 
                 do
                 {
@@ -41,6 +42,11 @@ namespace AlgorithmComparisonEngine
                     Interact.WriteText(ConsoleColor.Green, " Do you want to choose another algorithm ? \n 1. Yes \n 2. No");
                     repeat = (Interact.TakeUserOutput(2) == 1) ? true : false;
 
+                    Interact.WriteText(ConsoleColor.Green, " Do you want to compare them ? \n 1. Yes \n 2. No");
+                    compare = (Interact.TakeUserOutput(2) == 1) ? true : false;
+
+
+
 
                 } while (repeat);
 
@@ -51,7 +57,6 @@ namespace AlgorithmComparisonEngine
     }
         // TODO#
         // Nazewnictwo
-        // w ifach dodać interact take user == 1
         // nie powinno sie zwracac exception i system exception - zbyt ogolne
         // zrobic żeby porównywało algorytmy
 

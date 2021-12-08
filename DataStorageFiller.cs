@@ -136,23 +136,23 @@ namespace AlgorithmComparisonEngine
             filePath = Directory.GetParent(filePath).Parent.Parent.FullName;
 
             // This will get the current PROJECT bin directory (ie ../bin/)
-            filePath = Directory.GetParent(filePath).Parent.FullName;
+            //filePath = Directory.GetParent(filePath).Parent.FullName;
             // This will get the current PROJECT directory
 
             do
             {
-                Interact.WriteText(ConsoleColor.Red, "Insert file name. It should be txt file !");
+                Interact.WriteText(ConsoleColor.Red, " Insert file name. It should be txt file !");
                 fileName = Console.ReadLine();
                 if (!fileName.EndsWith(@".txt"))
                 {
                     fileName += @".txt";
                 }
 
-                filePath += filePath + @$"\{fileName}";
+                filePath += @$"\{fileName}";
 
                 if (!File.Exists(filePath))
                 {
-                    Interact.WriteText(ConsoleColor.Red, "File doesn't exists or you input invalid file name ! Try again.");
+                    Interact.WriteText(ConsoleColor.Red, " File doesn't exists or you input invalid file name ! Try again.");
                     return "false";
                 }
             } while (!File.Exists(filePath));

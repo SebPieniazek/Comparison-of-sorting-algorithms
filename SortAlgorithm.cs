@@ -6,8 +6,10 @@ namespace AlgorithmComparisonEngine
     abstract class SortAlgorithm
     {
         protected string name;
+        protected string information;
         protected int temp;
         protected int count = 1;
+        protected double sortTime;
         protected bool sorted;
         protected bool ascending;
         protected static Stopwatch stopWatch = new Stopwatch();
@@ -16,7 +18,8 @@ namespace AlgorithmComparisonEngine
 
         protected void InputData(int[] arrayToWrite)
         {
-            Interact.WriteText(ConsoleColor.Red, $" Posortowano w {stopWatch.Elapsed} milisekund. Użyty Algorytm: {name}");
+            sortTime = stopWatch.Elapsed.TotalMilliseconds;
+            Interact.WriteText(ConsoleColor.Red, $" Posortowano w {sortTime} milisekund. Użyty Algorytm: {name}");
             if (ShowData("sorted"))
             {
                 Interact.WriteText(ConsoleColor.Red, " Posortowana tablica:");
@@ -44,6 +47,7 @@ namespace AlgorithmComparisonEngine
         public BubbleSort(bool sortOrder)
         {
             name = "Bubble Sort";
+            information = "Informations";
             ascending = sortOrder;
             StartSort(DataStorage.TakeData());
         }
@@ -96,6 +100,7 @@ namespace AlgorithmComparisonEngine
         public InsertSort(bool sortOrder)
         {
             name = "Insert Sort";
+            information = "Informations";
             ascending = sortOrder;
             StartSort(DataStorage.TakeData());
         }
@@ -143,3 +148,4 @@ namespace AlgorithmComparisonEngine
 // TODO
 // Zrobić w klasie bazowej konstuktor zamiast w klasach pochodnych
 // poszukac sposobu na zmienienie operatora > w zależności od tego jak ma byc sortowane
+// poprawic ShowData. zła nazwa i sposób działania
