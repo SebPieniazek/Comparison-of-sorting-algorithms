@@ -1,0 +1,44 @@
+﻿using System;
+
+namespace AlgorithmComparisonEngine
+{
+    static class Interact
+    {
+        static public void WriteText(ConsoleColor color, string text)
+        {
+            Console.ForegroundColor = color;
+
+            Console.WriteLine(text);
+
+            Console.ResetColor();
+        }
+
+        static public int TakeUserOutput(int maxChoice)
+        {
+            int userChoice = 1;
+            bool badChoice;
+            do
+            {
+                try
+                {
+                    userChoice = Convert.ToInt32(Console.ReadLine());
+                    badChoice = false;
+                }
+                catch (Exception _)
+                {
+                    badChoice = true;
+                    WriteText(ConsoleColor.Red, " Put the number of the choosen option !");
+                }
+                
+                if ((userChoice > maxChoice || userChoice < 1) && badChoice == false)
+                {
+                    WriteText(ConsoleColor.Red, " Put the number of the choosen option !");
+                    badChoice = true;
+                }
+
+            } while (badChoice);
+            return userChoice;
+        }
+
+    }
+}
