@@ -45,8 +45,10 @@ namespace AlgorithmComparisonEngine
                     Interact.WriteText(ConsoleColor.Green, " Do you want to compare them ? \n 1. Yes \n 2. No");
                     compare = (Interact.TakeUserOutput(2) == 1) ? true : false;
 
-
-
+                    if(compare && Records.id > 1)
+                    {
+                        Records.ShowRecords();
+                    }
 
                 } while (repeat);
 
@@ -58,6 +60,6 @@ namespace AlgorithmComparisonEngine
         // TODO#
         // Nazewnictwo
         // nie powinno sie zwracac exception i system exception - zbyt ogolne
-        // zrobic żeby porównywało algorytmy
+        // Inaczej pytać o porównywanie
 
 }

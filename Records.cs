@@ -3,36 +3,36 @@ using System.Collections.Generic;
 
 namespace AlgorithmComparisonEngine
 {
-    class Records
+    static class Records
     {
-        int id = 1;
+        public static int id = 1;
         record AlgorithmData(int id, string name, double time);
-        List<AlgorithmData> algorithmsData = new List<AlgorithmData>();
+        static List<AlgorithmData> algorithmsData = new List<AlgorithmData>();
 
-        void AddRecord(string name, double time)
+        public static void AddRecord(string name, double time)
         {
             algorithmsData.Add(new AlgorithmData(id, name, time));
             id++;
         }
 
-        void RemoveRecords()
+        public static void RemoveRecords()
         {
             algorithmsData.Clear();
             id = 1;
         }
 
-        void ShowRecords()
+
+        public static void ShowRecords()
         {
-            foreach(var record in algorithmsData)
-            {
-                Interact.WriteText(ConsoleColor.Red, $"{id}. {record.name} execute time: {record.time}");
-            }
+                foreach (var record in algorithmsData)
+                {
+                    Interact.WriteText(ConsoleColor.Red, $" {record.id}. {record.name} execute time: {record.time}");
+                }
 
-            Interact.WriteText(ConsoleColor.Red, $"\n The fastest algorithm for this data is {algorithmsData[FastestAlgorithm()].name} !");
-
+                Interact.WriteText(ConsoleColor.Red, $"\n The fastest algorithm for this data is {algorithmsData[FastestAlgorithm()].name} !");
         }
 
-        int FastestAlgorithm()
+        static int FastestAlgorithm()
         {
             double time = 0;
             int recordIndex = 1;
@@ -47,9 +47,12 @@ namespace AlgorithmComparisonEngine
                 }
             }
 
-            return recordIndex;
+            return recordIndex - 1;
         }
 
     }
 }
 // porownywarka w innej klasie raczej.
+// fastest alghorithm nie static ?
+// id nie public ? właściwość
+// powinno osobno porownywać rosnąco i malejąco

@@ -20,6 +20,7 @@ namespace AlgorithmComparisonEngine
         {
             sortTime = stopWatch.Elapsed.TotalMilliseconds;
             Interact.WriteText(ConsoleColor.Red, $" Posortowano w {sortTime} milisekund. Użyty Algorytm: {name}");
+            SaveData();
             if (ShowData("sorted"))
             {
                 Interact.WriteText(ConsoleColor.Red, " Posortowana tablica:");
@@ -39,6 +40,11 @@ namespace AlgorithmComparisonEngine
         {
             Interact.WriteText(ConsoleColor.Green, $"Do you want to see {dataType} data ?\n  1. Yes \n  2. No");
             return Interact.TakeUserOutput(2) == 1 ? true : false;
+        }
+
+        protected void SaveData()
+        {
+            Records.AddRecord(name, sortTime);
         }
     }
 
@@ -149,3 +155,4 @@ namespace AlgorithmComparisonEngine
 // Zrobić w klasie bazowej konstuktor zamiast w klasach pochodnych
 // poszukac sposobu na zmienienie operatora > w zależności od tego jak ma byc sortowane
 // poprawic ShowData. zła nazwa i sposób działania
+// ascending = enum ?
