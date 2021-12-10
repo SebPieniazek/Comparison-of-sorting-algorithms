@@ -14,16 +14,14 @@ namespace AlgorithmComparisonEngine
                 _ = new DataStorageFiller();
                 bool repeat;
                 bool ascending;
-                bool compare;
+                bool compare = false;
 
                 do
                 {
                     Interact.WriteText(ConsoleColor.Green, " Did date should be order ascending ? \n 1. Yes \n 2. No");
                     ascending = Interact.TakeUserOutput(2) == 1 ? true : false;
 
-                    Interact.WriteText(ConsoleColor.Green, " Which algorithm you want to use ?");
-                    Interact.WriteText(ConsoleColor.Green, "  1. Bubble sort");
-                    Interact.WriteText(ConsoleColor.Green, "  2. Insert sort");
+                    Interact.WriteText(ConsoleColor.Green, " Which algorithm you want to use ?\n  1.Bubble sort\n  2. Insert sort");
 
                     switch (Interact.TakeUserOutput(2))
                     {
@@ -42,9 +40,11 @@ namespace AlgorithmComparisonEngine
                     Interact.WriteText(ConsoleColor.Green, " Do you want to choose another algorithm ? \n 1. Yes \n 2. No");
                     repeat = (Interact.TakeUserOutput(2) == 1) ? true : false;
 
-                    Interact.WriteText(ConsoleColor.Green, " Do you want to compare them ? \n 1. Yes \n 2. No");
-                    compare = (Interact.TakeUserOutput(2) == 1) ? true : false;
-
+                    if (!compare)
+                    {
+                        Interact.WriteText(ConsoleColor.Green, " Do you want to compare them ? \n 1. Yes \n 2. No");
+                        compare = (Interact.TakeUserOutput(2) == 1) ? true : false;
+                    }
                     if(compare && Records.id > 1)
                     {
                         Records.ShowRecords();
@@ -60,6 +60,5 @@ namespace AlgorithmComparisonEngine
         // TODO#
         // Nazewnictwo
         // nie powinno sie zwracac exception i system exception - zbyt ogolne
-        // Inaczej pytać o porównywanie
 
 }
