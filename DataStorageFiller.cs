@@ -265,4 +265,4 @@ namespace AlgorithmComparisonEngine
 }
 //TODO
 // ogarnac zeby maksymalnie pojedyncza liczba mogla miec 10 cyfr.
-// rozdzielic wybor na nowe klasy
+// TryParse zamiast isDigitsOnly ? 

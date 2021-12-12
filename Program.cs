@@ -10,7 +10,6 @@ namespace AlgorithmComparisonEngine
             Interact.WriteText(ConsoleColor.Red, "[Algorithm Comparison Engine] ver. 0.01 by Sebastian Pieniążek");
             do
             {
-                //DataStorageFiller dataStorageFiller = new DataStorageFiller();
                 _ = new DataStorageFiller();
                 bool repeat;
                 bool ascending;
@@ -26,11 +25,9 @@ namespace AlgorithmComparisonEngine
                     switch (Interact.TakeUserOutput(2))
                     {
                         case 1:
-                            //SortAlgorithm bubbleSort = new BubbleSort(ascending);
                             _ = new BubbleSort(ascending);
                             break;
                         case 2:
-                            //SortAlgorithm insertSort = new InsertSort(ascending);
                             _ = new InsertSort(ascending);
                             break;
                         default:
@@ -45,7 +42,7 @@ namespace AlgorithmComparisonEngine
                         Interact.WriteText(ConsoleColor.Green, " Do you want to compare them ? \n 1. Yes \n 2. No");
                         compare = (Interact.TakeUserOutput(2) == 1) ? true : false;
                     }
-                    if(compare && Records.id > 1)
+                    if(compare && Records.Id > 1)
                     {
                         Records.ShowRecords();
                     }
@@ -60,5 +57,6 @@ namespace AlgorithmComparisonEngine
         // TODO#
         // Nazewnictwo
         // nie powinno sie zwracac exception i system exception - zbyt ogolne
+        // dodać klasę Config która będzie konfigurowała to co chce widzieć użytkownik zamiast pytać co chwilę o wszystko.
 
 }

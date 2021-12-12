@@ -30,7 +30,7 @@ namespace AlgorithmComparisonEngine
                     WriteText(ConsoleColor.Red, " Put the number of the choosen option !");
                 }
                 
-                if ((userChoice > maxChoice || userChoice < 1) && badChoice == false)
+                if (badChoice == false && (userChoice > maxChoice || userChoice < 1))
                 {
                     WriteText(ConsoleColor.Red, " Put the number of the choosen option !");
                     badChoice = true;

@@ -39,3 +39,4 @@ namespace AlgorithmComparisonEngine
 
     }
 }
+// zastanowic się nad tym czy nie lepiej jest zmienic static na normalna. - bezpieczenstwo danych ?

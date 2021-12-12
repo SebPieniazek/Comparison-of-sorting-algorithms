@@ -13,7 +13,7 @@ namespace AlgorithmComparisonEngine
         protected bool sorted;
         protected bool ascending;
         protected static Stopwatch stopWatch = new Stopwatch();
-        
+
         public abstract void StartSort(int[] arrayToSort);
 
         protected void InputData(int[] arrayToWrite)
@@ -154,5 +154,5 @@ namespace AlgorithmComparisonEngine
 // TODO
 // Zrobić w klasie bazowej konstuktor zamiast w klasach pochodnych
 // poszukac sposobu na zmienienie operatora > w zależności od tego jak ma byc sortowane
-// poprawic ShowData. zła nazwa i sposób działania
-// ascending = enum ?
+// int i count lokalnie nie globalnie.
+// show data na config przerobic

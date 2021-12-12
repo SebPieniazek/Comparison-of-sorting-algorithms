@@ -5,20 +5,20 @@ namespace AlgorithmComparisonEngine
 {
     static class Records
     {
-        public static int id = 1;
-        record AlgorithmData(int id, string name, double time);
+        public static int Id { get; set; } = 1;
+        record AlgorithmData(int Id, string Name, double Time);
         static List<AlgorithmData> algorithmsData = new List<AlgorithmData>();
 
         public static void AddRecord(string name, double time)
         {
-            algorithmsData.Add(new AlgorithmData(id, name, time));
-            id++;
+            algorithmsData.Add(new AlgorithmData(Id, name, time));
+            Id++;
         }
 
         public static void RemoveRecords()
         {
             algorithmsData.Clear();
-            id = 1;
+            Id = 1;
         }
 
 
@@ -26,10 +26,10 @@ namespace AlgorithmComparisonEngine
         {
                 foreach (var record in algorithmsData)
                 {
-                    Interact.WriteText(ConsoleColor.Red, $" {record.id}. {record.name} execute time: {record.time}");
+                    Interact.WriteText(ConsoleColor.Red, $" {record.Id}. {record.Name} execute time: {record.Time}");
                 }
 
-                Interact.WriteText(ConsoleColor.Red, $"\n The fastest algorithm for this data is {algorithmsData[FastestAlgorithm()].name} !");
+                Interact.WriteText(ConsoleColor.Red, $"\n The fastest algorithm for this data is {algorithmsData[FastestAlgorithm()].Name} !");
         }
 
         static int FastestAlgorithm()
@@ -37,13 +37,12 @@ namespace AlgorithmComparisonEngine
             double time = 0;
             int recordIndex = 1;
 
-
             foreach(var record in algorithmsData)
             {
-                if(record.id == 1 || record.time < time)
+                if(record.Id == 1 || record.Time < time)
                 {
-                    time = record.time;
-                    recordIndex = record.id;
+                    time = record.Time;
+                    recordIndex = record.Id;
                 }
             }
 
@@ -52,7 +51,4 @@ namespace AlgorithmComparisonEngine
 
     }
 }
-// porownywarka w innej klasie raczej.
-// fastest alghorithm nie static ?
-// id nie public ? właściwość
 // powinno osobno porownywać rosnąco i malejąco
