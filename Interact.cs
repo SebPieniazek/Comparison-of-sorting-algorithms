@@ -40,5 +40,11 @@ namespace AlgorithmComparisonEngine
             return userChoice;
         }
 
+        static public void ProgramInformation()
+        {
+            WriteText(ConsoleColor.Red, "[Algorithm Comparison Engine] ver. 0.4 by Sebastian Pieniążek");
+            Console.WriteLine();
+        }
+
     }
 }

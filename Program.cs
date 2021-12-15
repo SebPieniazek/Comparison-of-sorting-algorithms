@@ -7,13 +7,15 @@ namespace AlgorithmComparisonEngine
     {
         static void Main()
         {
-            Interact.WriteText(ConsoleColor.Red, "[Algorithm Comparison Engine] ver. 0.01 by Sebastian Pieniążek");
+            Interact.ProgramInformation();
             do
             {
+                _ = new Configuration();
                 _ = new DataStorageFiller();
                 bool repeat;
                 bool ascending;
                 bool compare = false;
+
 
                 do
                 {
