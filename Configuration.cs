@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 
 namespace AlgorithmComparisonEngine
 {
@@ -11,29 +12,30 @@ namespace AlgorithmComparisonEngine
 
         void ConfigurationMenu()
         {
-            bool temp = false;
+            Func<string, bool> settingStatus = settingName => ConfigurationManager.AppSettings.Get(settingName) == "true";
             bool userExit = false;
-
             do
             {
+
+
                 Console.Clear();
                 Interact.ProgramInformation();
 
                 Interact.WriteText(ConsoleColor.DarkRed, "CONFIGURATION MENU");
 
-                ViewOptionStatus(temp);
+                ViewOptionStatus(settingStatus("AscendingOrder"));
                 Interact.WriteText(ConsoleColor.Green, "  1. Ascending sorting order");
 
-                ViewOptionStatus(temp);
+                ViewOptionStatus(settingStatus("AdditionalInfo"));
                 Interact.WriteText(ConsoleColor.Green, "  2. Show additional information about alghoritms");
 
-                ViewOptionStatus(temp);
+                ViewOptionStatus(settingStatus("ShowSortedData"));
                 Interact.WriteText(ConsoleColor.Green, "  3. Show sorted data");
 
-                ViewOptionStatus(temp);
+                ViewOptionStatus(settingStatus("ShowOriginalData"));
                 Interact.WriteText(ConsoleColor.Green, "  4. Show orginal data");
 
-                ViewOptionStatus(temp);
+                ViewOptionStatus(settingStatus("CompareAfterEveryUse"));
                 Interact.WriteText(ConsoleColor.Green, "  5. Compare alghoritms after every use");
 
                 Interact.WriteText(ConsoleColor.Green, "  6. Return");
@@ -41,19 +43,19 @@ namespace AlgorithmComparisonEngine
                 switch (Interact.TakeUserOutput(6))
                 {
                     case 1:
-                        temp = !temp;
+                        ChangeSetting("AscendingOrder");
                         break;
                     case 2:
-                        temp = !temp;
+                        ChangeSetting("AdditionalInfo");
                         break;
                     case 3:
-                        temp = !temp;
+                        ChangeSetting("ShowSortedData");
                         break;
                     case 4:
-                        temp = !temp;
+                        ChangeSetting("ShowOriginalData");
                         break;
                     case 5:
-                        temp = !temp;
+                        ChangeSetting("CompareAfterEveryUse");
                         break;
                     case 6:
                         userExit = true;
@@ -79,5 +81,14 @@ namespace AlgorithmComparisonEngine
             Console.CursorLeft = 0;
             Console.ResetColor();
         }
+
+        void ChangeSetting(string name)
+        {
+            if (ConfigurationManager.AppSettings.Get(name) == "true")
+                ConfigurationManager.AppSettings.Set(name, "false");
+            else
+                ConfigurationManager.AppSettings.Set(name, "true");
+        }
+
     }
 }

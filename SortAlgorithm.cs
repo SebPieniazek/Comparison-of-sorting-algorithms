@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Configuration;
 
 namespace AlgorithmComparisonEngine
 {
@@ -13,6 +14,12 @@ namespace AlgorithmComparisonEngine
         protected bool sorted;
         protected bool ascending;
         protected static Stopwatch stopWatch = new Stopwatch();
+        Func<string, bool> settingStatus = settingName => ConfigurationManager.AppSettings.Get(settingName) == "true";
+
+        public SortAlgorithm()
+        {
+            ascending = settingStatus("AscendingOrder");
+        }
 
         public abstract void StartSort(int[] arrayToSort);
 
@@ -21,7 +28,7 @@ namespace AlgorithmComparisonEngine
             sortTime = stopWatch.Elapsed.TotalMilliseconds;
             Interact.WriteText(ConsoleColor.Red, $" Posortowano w {sortTime} milisekund. Użyty Algorytm: {name}");
             SaveData();
-            if (ShowData("sorted"))
+            if (settingStatus("ShowSorted"))
             {
                 Interact.WriteText(ConsoleColor.Red, " Posortowana tablica:");
                 foreach (int i in arrayToWrite)
@@ -29,17 +36,11 @@ namespace AlgorithmComparisonEngine
                     Console.Write(i + " ");
                 }
                 Console.WriteLine();
-                if (ShowData("original"))
+                if (settingStatus("ShowOriginal"))
                 {
                     DataStorage.PrintOrginalData();
                 }
             }
-        }
-
-        protected bool ShowData(string dataType)
-        {
-            Interact.WriteText(ConsoleColor.Green, $"Do you want to see {dataType} data ?\n  1. Yes \n  2. No");
-            return Interact.TakeUserOutput(2) == 1 ? true : false;
         }
 
         protected void SaveData()
@@ -50,11 +51,10 @@ namespace AlgorithmComparisonEngine
 
     class BubbleSort : SortAlgorithm
     {
-        public BubbleSort(bool sortOrder)
+        public BubbleSort()
         {
             name = "Bubble Sort";
             information = "Informations";
-            ascending = sortOrder;
             StartSort(DataStorage.TakeData());
         }
 
@@ -103,11 +103,10 @@ namespace AlgorithmComparisonEngine
 
     class InsertSort : SortAlgorithm
     {
-        public InsertSort(bool sortOrder)
+        public InsertSort()
         {
             name = "Insert Sort";
             information = "Informations";
-            ascending = sortOrder;
             StartSort(DataStorage.TakeData());
         }
         public override void StartSort(int[] arrayToSort)

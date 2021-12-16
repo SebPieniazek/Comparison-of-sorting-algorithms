@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Configuration;
+using System.Collections.Specialized;
 
 namespace AlgorithmComparisonEngine
 {
@@ -13,41 +15,31 @@ namespace AlgorithmComparisonEngine
                 _ = new Configuration();
                 _ = new DataStorageFiller();
                 bool repeat;
-                bool ascending;
-                bool compare = false;
-
+                Func<string, bool> settingStatus = settingName => ConfigurationManager.AppSettings.Get(settingName) == "true";
 
                 do
                 {
-                    Interact.WriteText(ConsoleColor.Green, " Did date should be order ascending ? \n 1. Yes \n 2. No");
-                    ascending = Interact.TakeUserOutput(2) == 1 ? true : false;
-
                     Interact.WriteText(ConsoleColor.Green, " Which algorithm you want to use ?\n  1.Bubble sort\n  2. Insert sort");
 
                     switch (Interact.TakeUserOutput(2))
                     {
                         case 1:
-                            _ = new BubbleSort(ascending);
+                            _ = new BubbleSort();
                             break;
                         case 2:
-                            _ = new InsertSort(ascending);
+                            _ = new InsertSort();
                             break;
                         default:
                             break;
                     }
 
-                    Interact.WriteText(ConsoleColor.Green, " Do you want to choose another algorithm ? \n 1. Yes \n 2. No");
-                    repeat = (Interact.TakeUserOutput(2) == 1) ? true : false;
-
-                    if (!compare)
-                    {
-                        Interact.WriteText(ConsoleColor.Green, " Do you want to compare them ? \n 1. Yes \n 2. No");
-                        compare = (Interact.TakeUserOutput(2) == 1) ? true : false;
-                    }
-                    if(compare && Records.Id > 1)
+                    if (settingStatus("CompareAfterEveryUse") && Records.Id > 1)
                     {
                         Records.ShowRecords();
                     }
+
+                    Interact.WriteText(ConsoleColor.Green, " Do you want to choose another algorithm ? \n 1. Yes \n 2. No");
+                    repeat = (Interact.TakeUserOutput(2) == 1) ? true : false;
 
                 } while (repeat);
 
