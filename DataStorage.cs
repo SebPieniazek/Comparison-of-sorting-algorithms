@@ -6,10 +6,12 @@ namespace AlgorithmComparisonEngine
     static class DataStorage
     {
         static int[] dataStorage;
+        public static bool dataStorageFilled = false;
 
         public static void SaveData(int[] takenData)
         {
             dataStorage = takenData;
+            dataStorageFilled = true;
         }
 
         static int[] CopyData()

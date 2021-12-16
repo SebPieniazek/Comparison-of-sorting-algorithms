@@ -24,12 +24,19 @@ namespace AlgorithmComparisonEngine
 
         public static void ShowRecords()
         {
+            if (Id > 1)
+            {
                 foreach (var record in algorithmsData)
                 {
                     Interact.WriteText(ConsoleColor.Red, $" {record.Id}. {record.Name} execute time: {record.Time}");
                 }
 
                 Interact.WriteText(ConsoleColor.Red, $"\n The fastest algorithm for this data is {algorithmsData[FastestAlgorithm()].Name} !");
+            }
+            else
+            {
+                Interact.WriteText(ConsoleColor.Red, "No data to compare, use some alghoritms and try again.");
+            }
         }
 
         static int FastestAlgorithm()

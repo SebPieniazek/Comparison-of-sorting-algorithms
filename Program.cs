@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Configuration;
-using System.Collections.Specialized;
 
 namespace AlgorithmComparisonEngine
 {
@@ -12,40 +11,65 @@ namespace AlgorithmComparisonEngine
             Interact.ProgramInformation();
             do
             {
-                _ = new Configuration();
-                _ = new DataStorageFiller();
-                bool repeat;
-                Func<string, bool> settingStatus = settingName => ConfigurationManager.AppSettings.Get(settingName) == "true";
+                Interact.WriteText(ConsoleColor.DarkGreen, " 1. Select Alghoritm \n 2. Compare already used alghoritms \n 3. Configuration \n 4. Exit");
 
-                do
+                switch (Interact.TakeUserOutput(4))
                 {
-                    Interact.WriteText(ConsoleColor.Green, " Which algorithm you want to use ?\n  1.Bubble sort\n  2. Insert sort");
-
-                    switch (Interact.TakeUserOutput(2))
-                    {
-                        case 1:
-                            _ = new BubbleSort();
-                            break;
-                        case 2:
-                            _ = new InsertSort();
-                            break;
-                        default:
-                            break;
-                    }
-
-                    if (settingStatus("CompareAfterEveryUse") && Records.Id > 1)
-                    {
+                    case 1:
+                        AlghoritmSelectionMenu();
+                        break;
+                    case 2:
                         Records.ShowRecords();
-                    }
+                        break;
+                    case 3:
+                        _ = new Configuration();
+                        break;
+                    case 4:
+                        Environment.Exit(1);
+                        break;
 
-                    Interact.WriteText(ConsoleColor.Green, " Do you want to choose another algorithm ? \n 1. Yes \n 2. No");
-                    repeat = (Interact.TakeUserOutput(2) == 1) ? true : false;
-
-                } while (repeat);
+                }
 
 
             } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
 
+        }
+
+        static void AlghoritmSelectionMenu()
+        {
+            bool repeat;
+            Func<string, bool> settingStatus = settingName => ConfigurationManager.AppSettings.Get(settingName) == "true";
+
+            if(!DataStorage.dataStorageFilled)
+            {
+                _ = new DataStorageFiller();
+            }
+
+            do
+            {
+                Interact.WriteText(ConsoleColor.Green, " Which algorithm you want to use ?\n  1.Bubble sort\n  2. Insert sort");
+
+                switch (Interact.TakeUserOutput(2))
+                {
+                    case 1:
+                        _ = new BubbleSort();
+                        break;
+                    case 2:
+                        _ = new InsertSort();
+                        break;
+                    default:
+                        break;
+                }
+
+                if (settingStatus("CompareAfterEveryUse"))
+                {
+                    Records.ShowRecords();
+                }
+
+                Interact.WriteText(ConsoleColor.Green, " Do you want to choose another algorithm ? \n 1. Yes \n 2. No");
+                repeat = (Interact.TakeUserOutput(2) == 1) ? true : false;
+
+            } while (repeat);
         }
     }
         // TODO#
