@@ -8,9 +8,12 @@ namespace AlgorithmComparisonEngine
     {
         protected int[] dataStorage;
 
-        public DataStorageFiller()
+        public DataStorageFiller(bool parentInstantion = false)
         {
-            TakeDigitsFromUser();
+            if (parentInstantion)
+            {
+                TakeDigitsFromUser();
+            }
         }
 
         void TakeDigitsFromUser()
@@ -154,7 +157,7 @@ namespace AlgorithmComparisonEngine
                 do
                 {
                     Interact.WriteText(ConsoleColor.Magenta, " Insert your date here:");
-                    Interact.WriteText(ConsoleColor.Magenta, " Maximum length of a single value is 10 digits."); // int = 32 bity = -2 147 483 648 to 2 147 483 647.
+                    Interact.WriteText(ConsoleColor.Magenta, " The maximum length of a single value is 10 digits."); // int = 32 bity = -2 147 483 648 to 2 147 483 647.
                     Interact.WriteText(ConsoleColor.Magenta, " A single value should be separated by ' ' space.");
 
                     goodOutput = IsDigitsOnly(userOutput = Console.ReadLine());
@@ -178,6 +181,7 @@ namespace AlgorithmComparisonEngine
             void AskUserForFile()
             {
                 Interact.WriteText(ConsoleColor.Magenta, " How do you want to upload the data?\n   1. Insert file path \n  2. Insert file name(file should be in Project folder)");
+                Interact.WriteText(ConsoleColor.DarkRed, "\n The maximum length of a single value is 10 digits !");
 
                 string filePath;
                 string fileData = "";
@@ -263,7 +267,3 @@ namespace AlgorithmComparisonEngine
 
     }
 }
-//TODO
-// ogarnac zeby maksymalnie pojedyncza liczba mogla miec 10 cyfr.
-// TryParse zamiast isDigitsOnly ?
-// zapetla sie na TakeDataFromUser bo wywoluje w kolko konstruktor klasy bazowej.

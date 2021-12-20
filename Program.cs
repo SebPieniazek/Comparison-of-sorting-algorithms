@@ -8,9 +8,10 @@ namespace AlgorithmComparisonEngine
     {
         static void Main()
         {
-            Interact.ProgramInformation();
             do
             {
+                Console.Clear();
+                Interact.ProgramInformation();
                 Interact.WriteText(ConsoleColor.DarkGreen, " 1. Select Alghoritm \n 2. Compare already used alghoritms \n 3. Configuration \n 4. Exit");
 
                 switch (Interact.TakeUserOutput(4))
@@ -38,24 +39,32 @@ namespace AlgorithmComparisonEngine
         static void AlghoritmSelectionMenu()
         {
             bool repeat;
+            bool returnToMenu = false;
             Func<string, bool> settingStatus = settingName => ConfigurationManager.AppSettings.Get(settingName) == "true";
 
             if(!DataStorage.dataStorageFilled)
             {
-                _ = new DataStorageFiller();
+                _ = new DataStorageFiller(parentInstantion: true);
             }
 
             do
             {
-                Interact.WriteText(ConsoleColor.Green, " Which algorithm you want to use ?\n  1.Bubble sort\n  2. Insert sort");
+                Console.Clear();
+                Interact.WriteText(ConsoleColor.Green, " Which algorithm you want to use ?\n  1.Bubble sort\n  2. Insert sort\n  3. Inser new data\n  4. Return");
 
-                switch (Interact.TakeUserOutput(2))
+                switch (Interact.TakeUserOutput(3))
                 {
                     case 1:
                         _ = new BubbleSort();
                         break;
                     case 2:
                         _ = new InsertSort();
+                        break;
+                    case 3:
+                        _ = new DataStorageFiller();
+                        break;
+                    case 4:
+                        returnToMenu = true;
                         break;
                     default:
                         break;
@@ -69,12 +78,13 @@ namespace AlgorithmComparisonEngine
                 Interact.WriteText(ConsoleColor.Green, " Do you want to choose another algorithm ? \n 1. Yes \n 2. No");
                 repeat = (Interact.TakeUserOutput(2) == 1) ? true : false;
 
-            } while (repeat);
+            } while (repeat || returnToMenu);
+            Console.Clear();
         }
     }
         // TODO#
         // Nazewnictwo
         // nie powinno sie zwracac exception i system exception - zbyt ogolne
-        // dodać klasę Config która będzie konfigurowała to co chce widzieć użytkownik zamiast pytać co chwilę o wszystko.
-
+        // nie stosuje sie do app.config
+        // w glownej petli zmienic read key na nieskonczona pentle
 }

@@ -14,7 +14,7 @@ namespace AlgorithmComparisonEngine
         protected bool sorted;
         protected bool ascending;
         protected static Stopwatch stopWatch = new Stopwatch();
-        Func<string, bool> settingStatus = settingName => ConfigurationManager.AppSettings.Get(settingName) == "true";
+        readonly Func<string, bool> settingStatus = settingName => ConfigurationManager.AppSettings.Get(settingName) == "true";
 
         public SortAlgorithm()
         {
@@ -28,6 +28,8 @@ namespace AlgorithmComparisonEngine
             sortTime = stopWatch.Elapsed.TotalMilliseconds;
             Interact.WriteText(ConsoleColor.Red, $" Posortowano w {sortTime} milisekund. Użyty Algorytm: {name}");
             SaveData();
+            Console.WriteLine(ConfigurationManager.AppSettings.Get("ShowSorted"));
+            Console.WriteLine(settingStatus("ShowSorted"));
             if (settingStatus("ShowSorted"))
             {
                 Interact.WriteText(ConsoleColor.Red, " Posortowana tablica:");
@@ -151,7 +153,6 @@ namespace AlgorithmComparisonEngine
     }
 }
 // TODO
-// Zrobić w klasie bazowej konstuktor zamiast w klasach pochodnych
 // poszukac sposobu na zmienienie operatora > w zależności od tego jak ma byc sortowane
-// int i count lokalnie nie globalnie.
-// show data na config przerobic
+// temp i count lokalnie a nie globalnie
+// dla 1 cyfry program sie zacina

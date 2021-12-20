@@ -16,10 +16,8 @@ namespace AlgorithmComparisonEngine
             bool userExit = false;
             do
             {
-
-
-                Console.Clear();
                 Interact.ProgramInformation();
+                Console.Clear();
 
                 Interact.WriteText(ConsoleColor.DarkRed, "CONFIGURATION MENU");
 
