@@ -28,18 +28,16 @@ namespace AlgorithmComparisonEngine
                     case 4:
                         Environment.Exit(1);
                         break;
-
                 }
 
 
-            } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
+            } while (true);
 
         }
 
         static void AlghoritmSelectionMenu()
         {
-            bool repeat;
-            bool returnToMenu = false;
+            bool repeat = true;
             Func<string, bool> settingStatus = settingName => ConfigurationManager.AppSettings.Get(settingName) == "true";
 
             if(!DataStorage.dataStorageFilled)
@@ -52,7 +50,7 @@ namespace AlgorithmComparisonEngine
                 Console.Clear();
                 Interact.WriteText(ConsoleColor.Green, " Which algorithm you want to use ?\n  1.Bubble sort\n  2. Insert sort\n  3. Inser new data\n  4. Return");
 
-                switch (Interact.TakeUserOutput(3))
+                switch (Interact.TakeUserOutput(4))
                 {
                     case 1:
                         _ = new BubbleSort();
@@ -64,9 +62,7 @@ namespace AlgorithmComparisonEngine
                         _ = new DataStorageFiller();
                         break;
                     case 4:
-                        returnToMenu = true;
-                        break;
-                    default:
+                        repeat = false;
                         break;
                 }
 
@@ -75,16 +71,16 @@ namespace AlgorithmComparisonEngine
                     Records.ShowRecords();
                 }
 
-                Interact.WriteText(ConsoleColor.Green, " Do you want to choose another algorithm ? \n 1. Yes \n 2. No");
-                repeat = (Interact.TakeUserOutput(2) == 1) ? true : false;
-
-            } while (repeat || returnToMenu);
+                if (repeat)
+                {
+                    Interact.WriteText(ConsoleColor.Green, " Do you want to choose another algorithm ? \n 1. Yes \n 2. No");
+                    repeat = (Interact.TakeUserOutput(2) == 1) ? true : false;
+                }
+            } while (repeat);
             Console.Clear();
         }
     }
         // TODO#
         // Nazewnictwo
         // nie powinno sie zwracac exception i system exception - zbyt ogolne
-        // nie stosuje sie do app.config
-        // w glownej petli zmienic read key na nieskonczona pentle
 }

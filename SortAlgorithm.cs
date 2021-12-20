@@ -28,9 +28,7 @@ namespace AlgorithmComparisonEngine
             sortTime = stopWatch.Elapsed.TotalMilliseconds;
             Interact.WriteText(ConsoleColor.Red, $" Posortowano w {sortTime} milisekund. Użyty Algorytm: {name}");
             SaveData();
-            Console.WriteLine(ConfigurationManager.AppSettings.Get("ShowSorted"));
-            Console.WriteLine(settingStatus("ShowSorted"));
-            if (settingStatus("ShowSorted"))
+            if (settingStatus("ShowSortedData"))
             {
                 Interact.WriteText(ConsoleColor.Red, " Posortowana tablica:");
                 foreach (int i in arrayToWrite)
@@ -38,7 +36,7 @@ namespace AlgorithmComparisonEngine
                     Console.Write(i + " ");
                 }
                 Console.WriteLine();
-                if (settingStatus("ShowOriginal"))
+                if (settingStatus("ShowOriginalData"))
                 {
                     DataStorage.PrintOrginalData();
                 }
