@@ -153,4 +153,4 @@ namespace AlgorithmComparisonEngine
 // TODO
 // poszukac sposobu na zmienienie operatora > w zależności od tego jak ma byc sortowane
 // temp i count lokalnie a nie globalnie
-// dla 1 cyfry program sie zacina
+// dodac wyswietlanie dodatkowych informacji

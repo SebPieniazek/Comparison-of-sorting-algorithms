@@ -66,6 +66,7 @@ namespace AlgorithmComparisonEngine
                         {
                             _ = new DataStorageFiller(parentInstantion: true);
                         } while (!DataStorage.dataStorageFilled);
+                        Records.RemoveRecords();
                         break;
                     case 4:
                         repeat = false;

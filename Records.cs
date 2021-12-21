@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Collections.Generic;
 
 namespace AlgorithmComparisonEngine
@@ -24,7 +25,7 @@ namespace AlgorithmComparisonEngine
 
         public static void ShowRecords()
         {
-            if (Id > 1)
+            if (Id > 2)
             {
                 foreach (var record in algorithmsData)
                 {
@@ -32,10 +33,13 @@ namespace AlgorithmComparisonEngine
                 }
 
                 Interact.WriteText(ConsoleColor.Red, $"\n The fastest algorithm for this data is {algorithmsData[FastestAlgorithm()].Name} !");
+                Interact.WriteText(ConsoleColor.Green, " Press any button to continue");
+                Console.ReadLine();
             }
             else
             {
                 Interact.WriteText(ConsoleColor.Red, "No data to compare, use some alghoritms and try again.");
+                Thread.Sleep(2000);
             }
         }
 

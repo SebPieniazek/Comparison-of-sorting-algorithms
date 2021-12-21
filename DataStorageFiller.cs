@@ -114,12 +114,12 @@ namespace AlgorithmComparisonEngine
             {
                 if (str[i] == ' ')
                 {
-                    if(str[i + 1] != ' ')
+                    if (str[i + 1] != ' ')
                         dataStorageSize++;
                 }
             }
 
-            if(str[0] == ' ')
+            if (str[0] == ' ')
             {
                 dataStorageSize--;
             }
@@ -171,10 +171,10 @@ namespace AlgorithmComparisonEngine
 
                 do
                 {
+                    Interact.WriteText(ConsoleColor.DarkRed, " The maximum length of a single value is 10 digits.");// int = 32 bity = -2 147 483 648 to 2 147 483 647.
+                    Interact.WriteText(ConsoleColor.DarkRed, " Compartment 2-10000");
+                    Interact.WriteText(ConsoleColor.DarkRed, " A single value should be separated by ' ' space.");
                     Interact.WriteText(ConsoleColor.Magenta, " Insert your date here:");
-                    Interact.WriteText(ConsoleColor.Magenta, " The maximum length of a single value is 10 digits.");// int = 32 bity = -2 147 483 648 to 2 147 483 647.
-                    Interact.WriteText(ConsoleColor.Magenta, " Compartment 2-10000");
-                    Interact.WriteText(ConsoleColor.Magenta, " A single value should be separated by ' ' space.");
 
                     goodOutput = IsDigitsOnly(userOutput = Console.ReadLine());
                     if (!goodOutput)
@@ -196,7 +196,7 @@ namespace AlgorithmComparisonEngine
 
             void AskUserForFile()
             {
-                Interact.WriteText(ConsoleColor.Magenta, " How do you want to upload the data?\n   1. Insert file path \n  2. Insert file name(file should be in Project folder)");
+                Interact.WriteText(ConsoleColor.Magenta, " How do you want to upload the data?\n  1. Insert file path \n  2. Insert file name(file should be in Project folder)");
                 Interact.WriteText(ConsoleColor.DarkRed, "\n The maximum length of a single value is 10 digits !\n Compartment 2-10000\n A single value should be separated by ' ' space.");
 
                 string filePath;
@@ -282,4 +282,6 @@ namespace AlgorithmComparisonEngine
 
 
     }
+//#TODO
+//Dodac mozliwosc wyjscia z uzupelnienia danych ?
 }
