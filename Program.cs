@@ -42,13 +42,16 @@ namespace AlgorithmComparisonEngine
 
             if(!DataStorage.dataStorageFilled)
             {
-                _ = new DataStorageFiller(parentInstantion: true);
+                do
+                {
+                    _ = new DataStorageFiller(parentInstantion: true);
+                } while (!DataStorage.dataStorageFilled);
             }
 
             do
             {
                 Console.Clear();
-                Interact.WriteText(ConsoleColor.Green, " Which algorithm you want to use ?\n  1.Bubble sort\n  2. Insert sort\n  3. Inser new data\n  4. Return");
+                Interact.WriteText(ConsoleColor.Green, " Which algorithm you want to use ?\n  1. Bubble sort\n  2. Insert sort\n  3. Inser new data\n  4. Return");
 
                 switch (Interact.TakeUserOutput(4))
                 {
@@ -59,7 +62,10 @@ namespace AlgorithmComparisonEngine
                         _ = new InsertSort();
                         break;
                     case 3:
-                        _ = new DataStorageFiller();
+                        do
+                        {
+                            _ = new DataStorageFiller(parentInstantion: true);
+                        } while (!DataStorage.dataStorageFilled);
                         break;
                     case 4:
                         repeat = false;
@@ -73,7 +79,7 @@ namespace AlgorithmComparisonEngine
 
                 if (repeat)
                 {
-                    Interact.WriteText(ConsoleColor.Green, " Do you want to choose another algorithm ? \n 1. Yes \n 2. No");
+                    Interact.WriteText(ConsoleColor.Green, " Do you want to select the next sorting alghoritm ? \n 1. Yes \n 2. No");
                     repeat = (Interact.TakeUserOutput(2) == 1) ? true : false;
                 }
             } while (repeat);

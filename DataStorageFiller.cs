@@ -7,6 +7,7 @@ namespace AlgorithmComparisonEngine
     class DataStorageFiller
     {
         protected int[] dataStorage;
+        protected readonly Func<int, bool> checkMinOutput = userOutput => userOutput > 1;
 
         public DataStorageFiller(bool parentInstantion = false)
         {
@@ -61,40 +62,48 @@ namespace AlgorithmComparisonEngine
             StringBuilder completeDigit = new StringBuilder();
             int[] dataStorage = new int[DeclareDateStorageSize(strToChange)];
 
-            for (int i = 0; i < strToChange.Length; i++)
+            if (checkMinOutput(dataStorage.Length))
             {
-                if (!end)
+                for (int i = 0; i < strToChange.Length; i++)
                 {
-                    for (int j = i; j < strToChange.Length; j++)
+                    if (!end)
                     {
-                        if (strToChange[j] != ' ')
+                        for (int j = i; j < strToChange.Length; j++)
                         {
-                            addToBuilder = true;
-                            completeDigit.Append(strToChange[j]);
+                            if (strToChange[j] != ' ')
+                            {
+                                addToBuilder = true;
+                                completeDigit.Append(strToChange[j]);
+                            }
+                            else
+                            {
+                                i = j;
+                                break;
+                            }
                         }
-                        else
+                    }
+                    else
+                        break;
+                    if (addToBuilder)
+                    {
+                        int.TryParse(completeDigit.ToString(), out singleValue);
+                        dataStorage[dataStorageIndex] = singleValue;
+                        dataStorageIndex++;
+                        completeDigit.Clear();
+                        addToBuilder = false;
+                        if (dataStorageIndex > dataStorage.Length - 1)
                         {
-                            i = j;
-                            break;
+                            end = true;
                         }
                     }
                 }
-                else
-                    break;
-                if (addToBuilder)
-                {
-                    int.TryParse(completeDigit.ToString(), out singleValue);
-                    dataStorage[dataStorageIndex] = singleValue;
-                    dataStorageIndex++;
-                    completeDigit.Clear();
-                    addToBuilder = false;
-                    if (dataStorageIndex > dataStorage.Length - 1)
-                    {
-                        end = true;
-                    }
-                }
+                DataStorage.SaveData(dataStorage);
             }
-            DataStorage.SaveData(dataStorage);
+            else
+            {
+                Interact.WriteText(ConsoleColor.DarkRed, "Not enought values !");
+                DataStorage.dataStorageFilled = false;
+            }
         }
 
         int DeclareDateStorageSize(string str)
@@ -123,8 +132,14 @@ namespace AlgorithmComparisonEngine
         {
             public RandomValue()
             {
-                Interact.WriteText(ConsoleColor.Magenta, " How much digits you want to draw ? (max. 10000)");
-                dataStorage = new int[Interact.TakeUserOutput(10000)];
+                int userOutput;
+                do
+                {
+                    Interact.WriteText(ConsoleColor.Magenta, " How much digits you want to draw ? (compartment 2-10000)");
+                    userOutput = Interact.TakeUserOutput(10000);
+                }
+                while (!checkMinOutput(userOutput));
+                dataStorage = new int[userOutput];
 
                 Draw();
 
@@ -157,7 +172,8 @@ namespace AlgorithmComparisonEngine
                 do
                 {
                     Interact.WriteText(ConsoleColor.Magenta, " Insert your date here:");
-                    Interact.WriteText(ConsoleColor.Magenta, " The maximum length of a single value is 10 digits."); // int = 32 bity = -2 147 483 648 to 2 147 483 647.
+                    Interact.WriteText(ConsoleColor.Magenta, " The maximum length of a single value is 10 digits.");// int = 32 bity = -2 147 483 648 to 2 147 483 647.
+                    Interact.WriteText(ConsoleColor.Magenta, " Compartment 2-10000");
                     Interact.WriteText(ConsoleColor.Magenta, " A single value should be separated by ' ' space.");
 
                     goodOutput = IsDigitsOnly(userOutput = Console.ReadLine());
@@ -181,7 +197,7 @@ namespace AlgorithmComparisonEngine
             void AskUserForFile()
             {
                 Interact.WriteText(ConsoleColor.Magenta, " How do you want to upload the data?\n   1. Insert file path \n  2. Insert file name(file should be in Project folder)");
-                Interact.WriteText(ConsoleColor.DarkRed, "\n The maximum length of a single value is 10 digits !");
+                Interact.WriteText(ConsoleColor.DarkRed, "\n The maximum length of a single value is 10 digits !\n Compartment 2-10000\n A single value should be separated by ' ' space.");
 
                 string filePath;
                 string fileData = "";
