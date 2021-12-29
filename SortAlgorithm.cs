@@ -149,8 +149,69 @@ namespace AlgorithmComparisonEngine
         }
 
     }
+
+    class SelectionSort : SortAlgorithm
+    {
+        public SelectionSort()
+        {
+            name = "Selection Sort";
+            information = "Informations";
+            StartSort(DataStorage.TakeData());
+        }
+
+        public override void StartSort(int[] arrayToSort)
+        {
+            stopWatch.Reset();
+            stopWatch.Start();
+
+
+            stopWatch.Stop();
+            InputData(arrayToSort);
+        }
+    }
+
+    class QuickSort : SortAlgorithm
+    {
+        public QuickSort()
+        {
+            name = "Quick Sort";
+            information = "Informations";
+            StartSort(DataStorage.TakeData());
+        }
+
+        public override void StartSort(int[] arrayToSort)
+        {
+            stopWatch.Reset();
+            stopWatch.Start();
+
+
+            stopWatch.Stop();
+            InputData(arrayToSort);
+        }
+    }
+
+    class MergeSort : SortAlgorithm
+    {
+        public MergeSort()
+        {
+            name = "Merge Sort";
+            information = "Informations";
+            StartSort(DataStorage.TakeData());
+        }
+
+        public override void StartSort(int[] arrayToSort)
+        {
+            stopWatch.Reset();
+            stopWatch.Start();
+
+
+            stopWatch.Stop();
+            InputData(arrayToSort);
+        }
+    }
 }
 // TODO
 // poszukac sposobu na zmienienie operatora > w zależności od tego jak ma byc sortowane
 // temp i count lokalnie a nie globalnie
 // dodac wyswietlanie dodatkowych informacji
+// StartSort zliczanie czasu i input zrobic w klasie bazowej a w pochodnych zrobić wysyłanie metody jako parametr ?
