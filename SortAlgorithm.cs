@@ -164,6 +164,37 @@ namespace AlgorithmComparisonEngine
             stopWatch.Reset();
             stopWatch.Start();
 
+            int min = 0;
+            int index = 0;
+            int temp = 0;
+
+
+            for (int i = 0; i < arrayToSort.Length; i++)
+            {
+                min = arrayToSort[i];
+                for (int j = i; j < arrayToSort.Length; j++)
+                {
+                    if (ascending)
+                    {
+                        if (min >= arrayToSort[j])
+                        {
+                            min = arrayToSort[j];
+                            index = j;
+                        }
+                    }
+                    else
+                    {
+                        if (min <= arrayToSort[j])
+                        {
+                            min = arrayToSort[j];
+                            index = j;
+                        }
+                    }
+                }
+                temp = arrayToSort[i];
+                arrayToSort[i] = min;
+                arrayToSort[index] = temp;
+            }
 
             stopWatch.Stop();
             InputData(arrayToSort);
@@ -215,3 +246,4 @@ namespace AlgorithmComparisonEngine
 // temp i count lokalnie a nie globalnie
 // dodac wyswietlanie dodatkowych informacji
 // StartSort zliczanie czasu i input zrobic w klasie bazowej a w pochodnych zrobić wysyłanie metody jako parametr ?
+// dodac delegat/metode SWAP
