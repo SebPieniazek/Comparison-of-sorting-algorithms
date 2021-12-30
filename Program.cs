@@ -54,7 +54,7 @@ namespace AlgorithmComparisonEngine
                 Interact.WriteText(ConsoleColor.Green, " Which algorithm you want to use ?\n  1. Bubble sort\n  2. Insert sort\n" +
                                                        "  3. Selection sort\n  4. Quick sort\n  5. Merge sort\n  6. Inser new data\n  7. Return");
 
-                switch (Interact.TakeUserOutput(4))
+                switch (Interact.TakeUserOutput(7))
                 {
                     case 1:
                         _ = new BubbleSort();

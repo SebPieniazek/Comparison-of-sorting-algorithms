@@ -23,6 +23,13 @@ namespace AlgorithmComparisonEngine
 
         public abstract void StartSort(int[] arrayToSort);
 
+        public void Swap(ref int first, ref int second)
+        {
+            temp = first;
+            first = second;
+            second = temp;
+        }
+
         protected void InputData(int[] arrayToWrite)
         {
             sortTime = stopWatch.Elapsed.TotalMilliseconds;
@@ -215,9 +222,41 @@ namespace AlgorithmComparisonEngine
             stopWatch.Reset();
             stopWatch.Start();
 
+            QuickSortMethod(0, arrayToSort.Length, ref arrayToSort);
 
             stopWatch.Stop();
             InputData(arrayToSort);
+        }
+
+        void QuickSortMethod(int lowestElement, int HighestElement, ref int[] tab)
+        {
+            int min = lowestElement;
+            int max = HighestElement - 1;
+            int size = HighestElement - lowestElement;
+
+            if(size > 1)
+            {
+                int compareElement = tab[max];
+
+                while(min < max)
+                {
+                    while(tab[max]> compareElement && max > min)
+                    {
+                        max--;
+                    }
+                    while(tab[min] < compareElement && min <= max)
+                    {
+                        min++;
+                    }
+                    if(min < max)
+                    {
+                        Swap(ref tab[min], ref tab[max]);
+                        min++;
+                    }
+                }
+                QuickSortMethod(lowestElement, min, ref tab);
+                QuickSortMethod(max, HighestElement, ref tab);
+            }
         }
     }
 
@@ -246,4 +285,3 @@ namespace AlgorithmComparisonEngine
 // temp i count lokalnie a nie globalnie
 // dodac wyswietlanie dodatkowych informacji
 // StartSort zliczanie czasu i input zrobic w klasie bazowej a w pochodnych zrobić wysyłanie metody jako parametr ?
-// dodac delegat/metode SWAP
