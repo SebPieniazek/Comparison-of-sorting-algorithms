@@ -3,6 +3,9 @@
 
 namespace AlgorithmComparisonEngine
 {
+    // In this class the application stores user data. I make it static,
+    // because i want to let the user work on a single, global dataset.
+
     static class DataStorage
     {
         static int[] dataStorage;
@@ -14,31 +17,22 @@ namespace AlgorithmComparisonEngine
             dataStorageFilled = true;
         }
 
-        static int[] CopyData()
-        {
-            int[] copiedData;
-
-            copiedData = (int[])dataStorage.Clone();
-
-            return copiedData;
-        }
-
         public static int[] TakeData()
         {
-            return CopyData();
+            return (int[])dataStorage.Clone();
         }
 
         public static void PrintOrginalData()
         {
             Interact.WriteText(ConsoleColor.Red, " Orginal Data:");
+
             foreach(int i in dataStorage)
             {
                 Console.Write(i + " ");
             }
+
             Console.WriteLine();
         }
 
-
     }
 }
-// zastanowic się nad tym czy nie lepiej jest zmienic static na normalna. - bezpieczenstwo danych ?

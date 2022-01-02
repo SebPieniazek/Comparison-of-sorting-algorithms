@@ -5,6 +5,8 @@ namespace AlgorithmComparisonEngine
 {
     class Configuration
     {
+        readonly Func<string, bool> settingStatus = settingName => ConfigurationManager.AppSettings.Get(settingName) == "true";
+
         public Configuration()
         {
             ConfigurationMenu();
@@ -12,8 +14,8 @@ namespace AlgorithmComparisonEngine
 
         void ConfigurationMenu()
         {
-            Func<string, bool> settingStatus = settingName => ConfigurationManager.AppSettings.Get(settingName) == "true";
             bool userExit = false;
+
             do
             {
                 Interact.ProgramInformation();
@@ -21,19 +23,19 @@ namespace AlgorithmComparisonEngine
 
                 Interact.WriteText(ConsoleColor.DarkRed, "CONFIGURATION MENU");
 
-                ViewOptionStatus(settingStatus("AscendingOrder"));
+                ShowSettingStatus(settingStatus("AscendingOrder"));
                 Interact.WriteText(ConsoleColor.Green, "  1. Ascending sorting order");
 
-                ViewOptionStatus(settingStatus("AdditionalInfo"));
+                ShowSettingStatus(settingStatus("AdditionalInfo"));
                 Interact.WriteText(ConsoleColor.Green, "  2. Show additional information about alghoritms");
 
-                ViewOptionStatus(settingStatus("ShowSortedData"));
+                ShowSettingStatus(settingStatus("ShowSortedData"));
                 Interact.WriteText(ConsoleColor.Green, "  3. Show sorted data");
 
-                ViewOptionStatus(settingStatus("ShowOriginalData"));
+                ShowSettingStatus(settingStatus("ShowOriginalData"));
                 Interact.WriteText(ConsoleColor.Green, "  4. Show orginal data");
 
-                ViewOptionStatus(settingStatus("CompareAfterEveryUse"));
+                ShowSettingStatus(settingStatus("CompareAfterEveryUse"));
                 Interact.WriteText(ConsoleColor.Green, "  5. Compare alghoritms after every use");
 
                 Interact.WriteText(ConsoleColor.Green, "  6. Return");
@@ -41,19 +43,19 @@ namespace AlgorithmComparisonEngine
                 switch (Interact.TakeUserOutput(6))
                 {
                     case 1:
-                        ChangeSetting("AscendingOrder");
+                        ChangeSettingStatus("AscendingOrder");
                         break;
                     case 2:
-                        ChangeSetting("AdditionalInfo");
+                        ChangeSettingStatus("AdditionalInfo");
                         break;
                     case 3:
-                        ChangeSetting("ShowSortedData");
+                        ChangeSettingStatus("ShowSortedData");
                         break;
                     case 4:
-                        ChangeSetting("ShowOriginalData");
+                        ChangeSettingStatus("ShowOriginalData");
                         break;
                     case 5:
-                        ChangeSetting("CompareAfterEveryUse");
+                        ChangeSettingStatus("CompareAfterEveryUse");
                         break;
                     case 6:
                         userExit = true;
@@ -61,7 +63,7 @@ namespace AlgorithmComparisonEngine
                 }
             } while (!userExit);
         }
-        void ViewOptionStatus(bool option)
+        void ShowSettingStatus(bool option)
         {
             Console.CursorLeft = Console.BufferWidth - 4;
 
@@ -80,12 +82,16 @@ namespace AlgorithmComparisonEngine
             Console.ResetColor();
         }
 
-        void ChangeSetting(string name)
+        void ChangeSettingStatus(string name)
         {
             if (ConfigurationManager.AppSettings.Get(name) == "true")
+            {
                 ConfigurationManager.AppSettings.Set(name, "false");
+            }
             else
+            {
                 ConfigurationManager.AppSettings.Set(name, "true");
+            }
         }
 
     }
