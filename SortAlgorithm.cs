@@ -234,21 +234,21 @@ namespace AlgorithmComparisonEngine
             int max = HighestElement - 1;
             int size = HighestElement - lowestElement;
 
-            if(size > 1)
+            if (size > 1)
             {
                 int compareElement = tab[max];
 
-                while(min < max)
+                while (min < max)
                 {
-                    while(tab[max]> compareElement && max > min)
+                    while (tab[max] > compareElement && max > min)
                     {
                         max--;
                     }
-                    while(tab[min] < compareElement && min <= max)
+                    while (tab[min] < compareElement && min <= max)
                     {
                         min++;
                     }
-                    if(min < max)
+                    if (min < max)
                     {
                         Swap(ref tab[min], ref tab[max]);
                         min++;
@@ -274,10 +274,62 @@ namespace AlgorithmComparisonEngine
             stopWatch.Reset();
             stopWatch.Start();
 
+            MergeSortMethod(0, arrayToSort.Length - 1, arrayToSort);
 
             stopWatch.Stop();
             InputData(arrayToSort);
         }
+
+        void MergeSortMethod(int left, int right, int[] tab)
+        {
+            if (right - left > 1)
+            {
+                int divide = (left + right) / 2;
+                MergeSortMethod(left, divide, tab);
+                MergeSortMethod(divide + 1, right, tab);
+                Merge(left, divide, right, tab);
+            }
+        }
+        void Merge(int left, int mediana, int right, int[] tab)
+        {
+            int[] temp = new int[(mediana - left + 1) + (right - mediana + 1 + 1)];
+
+            int index = 0;
+            int startIndex = left;
+            int secStartIndex = mediana + 1;
+
+            while (startIndex <= mediana || secStartIndex <= right)
+            {
+                if (startIndex <= mediana && secStartIndex <= right)
+                {
+                    if (tab[startIndex] <= tab[secStartIndex])
+                    {
+                        temp[index++] = tab[startIndex++];
+                    }
+                    else
+                    {
+                        temp[index++] = tab[secStartIndex++];
+                    }
+                }
+                else if (startIndex <= mediana && secStartIndex > right)
+                {
+                    temp[index++] = tab[startIndex++];
+                }
+                else if (startIndex > mediana && secStartIndex <= right)
+                {
+                    temp[index++] = tab[secStartIndex++];
+                }
+            }
+            index = 0;
+            for (startIndex = left; startIndex <= mediana; startIndex++)
+            {
+                tab[startIndex] = temp[index++];
+            }
+            for (secStartIndex = mediana + 1; secStartIndex <= right; secStartIndex++)
+            {
+                tab[secStartIndex] = temp[index++];
+            }
+        } //# dont works correctly
     }
 }
 // TODO
