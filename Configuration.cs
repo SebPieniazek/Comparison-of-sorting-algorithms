@@ -18,7 +18,7 @@ namespace AlgorithmComparisonEngine
 
             do
             {
-                Interact.ProgramInformation();
+                Interact.ApplicationInfo();
                 Console.Clear();
 
                 Interact.WriteText(ConsoleColor.DarkRed, "CONFIGURATION MENU");
@@ -27,13 +27,13 @@ namespace AlgorithmComparisonEngine
                 Interact.WriteText(ConsoleColor.Green, "  1. Ascending sorting order");
 
                 ShowSettingStatus(settingStatus("AdditionalInfo"));
-                Interact.WriteText(ConsoleColor.Green, "  2. Show additional information about alghoritms");
+                Interact.WriteText(ConsoleColor.Green, "  2. Show additional informations about alghoritms");
 
                 ShowSettingStatus(settingStatus("ShowSortedData"));
                 Interact.WriteText(ConsoleColor.Green, "  3. Show sorted data");
 
                 ShowSettingStatus(settingStatus("ShowOriginalData"));
-                Interact.WriteText(ConsoleColor.Green, "  4. Show orginal data");
+                Interact.WriteText(ConsoleColor.Green, "  4. Show original data");
 
                 ShowSettingStatus(settingStatus("CompareAfterEveryUse"));
                 Interact.WriteText(ConsoleColor.Green, "  5. Compare alghoritms after every use");

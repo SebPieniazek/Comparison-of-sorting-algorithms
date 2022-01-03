@@ -6,12 +6,15 @@ namespace AlgorithmComparisonEngine
 
     class Program
     {
+        static readonly Func<string, bool> settingStatus = settingName => ConfigurationManager.AppSettings.Get(settingName) == "true";
+
         static void Main()
         {
             do
             {
                 Console.Clear();
-                Interact.ProgramInformation();
+
+                Interact.ApplicationInfo();
                 Interact.WriteText(ConsoleColor.DarkGreen, " 1. Select Alghoritm \n 2. Compare already used alghoritms \n 3. Configuration \n 4. Exit");
 
                 switch (Interact.TakeUserOutput(4))
@@ -30,7 +33,6 @@ namespace AlgorithmComparisonEngine
                         break;
                 }
 
-
             } while (true);
 
         }
@@ -38,14 +40,10 @@ namespace AlgorithmComparisonEngine
         static void AlghoritmSelectionMenu()
         {
             bool repeat = true;
-            Func<string, bool> settingStatus = settingName => ConfigurationManager.AppSettings.Get(settingName) == "true";
 
-            if(!DataStorage.dataStorageFilled)
+            if (!DataStorage.dataStorageFilled)
             {
-                do
-                {
-                    _ = new DataStorageFiller(parentInstantion: true);
-                } while (!DataStorage.dataStorageFilled);
+                FillDataStorage();
             }
 
             do
@@ -72,10 +70,7 @@ namespace AlgorithmComparisonEngine
                         _ = new MergeSort();
                         break;
                     case 6:
-                        do
-                        {
-                            _ = new DataStorageFiller(parentInstantion: true);
-                        } while (!DataStorage.dataStorageFilled);
+                        FillDataStorage();
                         Records.RemoveRecords();
                         break;
                     case 7:
@@ -91,14 +86,18 @@ namespace AlgorithmComparisonEngine
                 if (repeat)
                 {
                     Interact.WriteText(ConsoleColor.Green, " Do you want to select the next sorting alghoritm ? \n 1. Yes \n 2. No");
-                    repeat = (Interact.TakeUserOutput(2) == 1) ? true : false;
+                    repeat = (Interact.TakeUserOutput(2) == 1);
                 }
+
             } while (repeat);
-            Console.Clear();
+        }
+
+        static void FillDataStorage()
+        {
+            do
+            {
+                _ = new DataStorageFiller(parentInstantion: true);
+            } while (!DataStorage.dataStorageFilled);
         }
     }
-        // TODO#
-        // Nazewnictwo
-        // Porobic przerwy odpowiednio
-        // nie powinno sie zwracac exception i system exception - zbyt ogolne
 }

@@ -22,7 +22,7 @@ namespace AlgorithmComparisonEngine
             return (int[])dataStorage.Clone();
         }
 
-        public static void PrintOrginalData()
+        public static void PrintOriginalData()
         {
             Interact.WriteText(ConsoleColor.Red, " Orginal Data:");
 

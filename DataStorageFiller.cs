@@ -67,7 +67,7 @@ namespace AlgorithmComparisonEngine
             int singleValue;
 
             StringBuilder completeValue = new StringBuilder();
-            int[] dataStorage = new int[DeclareDateStorageSize(strToChange)];
+            dataStorage = new int[DeclareDateStorageSize(strToChange)];
 
             if (checkMinOutput(dataStorage.Length))
             {

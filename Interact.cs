@@ -4,9 +4,15 @@ namespace AlgorithmComparisonEngine
 {
     static class Interact
     {
-        static public void WriteText(ConsoleColor color, string text)
+        static public void ApplicationInfo()
         {
-            Console.ForegroundColor = color;
+            WriteText(ConsoleColor.Red, "[Comparison of sorting algorithms] ver. 0.9 by Sebastian Pieniążek");
+            Console.WriteLine();
+        }
+
+        static public void WriteText(ConsoleColor textColor, string text)
+        {
+            Console.ForegroundColor = textColor;
 
             Console.WriteLine(text);
 
@@ -16,35 +22,30 @@ namespace AlgorithmComparisonEngine
         static public int TakeUserOutput(int maxChoice)
         {
             int userChoice = 1;
-            bool badChoice;
+            bool goodChoice;
+
             do
             {
                 try
                 {
                     userChoice = Convert.ToInt32(Console.ReadLine());
-                    badChoice = false;
+                    goodChoice = true;
                 }
-                catch (Exception _)
+                catch (Exception)
                 {
-                    badChoice = true;
-                    WriteText(ConsoleColor.Red, " Put the number of the choosen option !");
+                    goodChoice = false;
+                    WriteText(ConsoleColor.Red, " Enter the number of the selected option !");
                 }
                 
-                if (badChoice == false && (userChoice > maxChoice || userChoice < 1))
+                if (goodChoice == true && (userChoice > maxChoice || userChoice < 1))
                 {
-                    WriteText(ConsoleColor.Red, " Put the number of the choosen option !");
-                    badChoice = true;
+                    WriteText(ConsoleColor.Red, " Enter the number of the selected option !");
+                    goodChoice = false;
                 }
 
-            } while (badChoice);
+            } while (!goodChoice);
+
             return userChoice;
         }
-
-        static public void ProgramInformation()
-        {
-            WriteText(ConsoleColor.Red, "[Algorithm Comparison Engine] ver. 0.7 by Sebastian Pieniążek");
-            Console.WriteLine();
-        }
-
     }
 }

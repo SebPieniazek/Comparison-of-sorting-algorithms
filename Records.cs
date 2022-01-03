@@ -6,13 +6,14 @@ namespace AlgorithmComparisonEngine
 {
     static class Records
     {
-        public static int Id { get; set; } = 1;
-        record AlgorithmData(int Id, string Name, double Time);
-        static List<AlgorithmData> algorithmsData = new List<AlgorithmData>();
+        private static int Id { get; set; } = 1;
+        private record AlgorithmData(int Id, string AlghoritmName, double ExecuteTime);
 
-        public static void AddRecord(string name, double time)
+        private static readonly List<AlgorithmData> algorithmsData = new List<AlgorithmData>();
+
+        public static void AddRecord(string alghoritmName, double executeTime)
         {
-            algorithmsData.Add(new AlgorithmData(Id, name, time));
+            algorithmsData.Add(new AlgorithmData(Id, alghoritmName, executeTime));
             Id++;
         }
 
@@ -22,17 +23,16 @@ namespace AlgorithmComparisonEngine
             Id = 1;
         }
 
-
         public static void ShowRecords()
         {
-            if (Id > 2)
+            if (Id >= 2)
             {
                 foreach (var record in algorithmsData)
                 {
-                    Interact.WriteText(ConsoleColor.Red, $" {record.Id}. {record.Name} execute time: {record.Time}");
+                    Interact.WriteText(ConsoleColor.Red, $" {record.Id}. {record.AlghoritmName} execute time: {record.ExecuteTime}");
                 }
 
-                Interact.WriteText(ConsoleColor.Red, $"\n The fastest algorithm for this data is {algorithmsData[FastestAlgorithm()].Name} !");
+                Interact.WriteText(ConsoleColor.Red, $"\n The fastest algorithm for this data is {algorithmsData[FastestAlgorithm()].AlghoritmName} !");
                 Interact.WriteText(ConsoleColor.Green, " Press any button to continue");
                 Console.ReadLine();
             }
@@ -43,23 +43,22 @@ namespace AlgorithmComparisonEngine
             }
         }
 
-        static int FastestAlgorithm()
+        private static int FastestAlgorithm()
         {
-            double time = 0;
-            int recordIndex = 1;
+            int bestRecordIndex = 1;
+            double bestExecuteTime = 0;
 
-            foreach(var record in algorithmsData)
+            foreach (var record in algorithmsData)
             {
-                if(record.Id == 1 || record.Time < time)
+                if(record.Id == 1 || record.ExecuteTime < bestExecuteTime)
                 {
-                    time = record.Time;
-                    recordIndex = record.Id;
+                    bestExecuteTime = record.ExecuteTime;
+                    bestRecordIndex = record.Id;
                 }
             }
 
-            return recordIndex - 1;
+            return bestRecordIndex - 1;
         }
 
     }
 }
-// powinno osobno porownywać rosnąco i malejąco
