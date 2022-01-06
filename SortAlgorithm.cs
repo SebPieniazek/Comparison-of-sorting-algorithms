@@ -35,12 +35,23 @@ namespace AlgorithmComparisonEngine
 
             SaveAlghoritmData(executeTime);
 
+            PrintInformation();
+
             PrintDataSet(arrayToPrint);
         }
 
         void SaveAlghoritmData(double executeTime)
         {
             Records.AddRecord(alghoritmName, executeTime);
+        }
+
+        void PrintInformation()
+        {
+            if(settingStatus("AdditionalInfo"))
+            {
+                Console.WriteLine();
+                Interact.WriteText(ConsoleColor.Green, alghoritmInformation);
+            }
         }
 
         void PrintDataSet(int[] arrayToPrint)
@@ -76,7 +87,7 @@ namespace AlgorithmComparisonEngine
                                    " Best - O(n)\n" +
                                    " Worst - O(n^2)\n" +
                                    "Best destiny for the algorithm:\n" +
-                                   " Small data sets - This alghoritm is easy to implement";
+                                   " Small data sets - This alghoritm is easy to implement\n";
             StartSort(DataStorage.TakeData());
         }
 
@@ -127,7 +138,7 @@ namespace AlgorithmComparisonEngine
                                    " Best - O(n)\n" +
                                    " Worst - O(n^2)\n" +
                                    "Best destiny for the algorithm:\n" +
-                                   " Small data sets - This alghoritm is easy to implement";
+                                   " Small data sets - This alghoritm is easy to implement\n";
             StartSort(DataStorage.TakeData());
         }
         protected override void StartSort(int[] arrayToSort)
@@ -185,7 +196,7 @@ namespace AlgorithmComparisonEngine
                                    " Best - O(n^2)\n" +
                                    " Worst - O(n^2)\n" +
                                    "Best destiny for the algorithm:\n" +
-                                   " Small data sets - This alghoritm is easy to implement, but it has the worst time complexity";
+                                   " Small data sets - This alghoritm is easy to implement, but it has the worst time complexity\n";
             StartSort(DataStorage.TakeData());
         }
 
@@ -240,7 +251,7 @@ namespace AlgorithmComparisonEngine
                                    " Best - O(n log n)\n" +
                                    " Worst - O(n^2)\n" +
                                    "Best destiny for the algorithm:\n" +
-                                   " Medium/Large data sets - This alghoritm uses recursion and it's moderately difficult to implement.\n It's one of the best sort alghoritms and is used in many libraries";
+                                   " Medium/Large data sets - This alghoritm uses recursion and it's moderately difficult to implement.\n It's one of the best sort alghoritms and is used in many libraries\n";
             StartSort(DataStorage.TakeData());
         }
 
