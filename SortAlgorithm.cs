@@ -6,53 +6,60 @@ namespace AlgorithmComparisonEngine
 {
     abstract class SortAlgorithm
     {
-        protected string name;
-        protected string information;
-        protected int temp;
-        protected int count = 1;
-        protected double sortTime;
-        protected bool sorted;
-        protected bool ascending;
-        protected static Stopwatch stopWatch = new Stopwatch();
         readonly Func<string, bool> settingStatus = settingName => ConfigurationManager.AppSettings.Get(settingName) == "true";
+        protected Stopwatch stopWatch = new Stopwatch();
+
+        protected string alghoritmName;
+        protected string alghoritmInformation;
+        protected bool ascending;
 
         public SortAlgorithm()
         {
             ascending = settingStatus("AscendingOrder");
         }
 
-        public abstract void StartSort(int[] arrayToSort);
+        protected abstract void StartSort(int[] arrayToSort);
 
-        public void Swap(ref int first, ref int second)
+        protected void Swap(ref int first, ref int second)
         {
-            temp = first;
+            int temp = first;
             first = second;
             second = temp;
         }
 
-        protected void InputData(int[] arrayToWrite)
+        protected void InputData(int[] arrayToPrint)
         {
-            sortTime = stopWatch.Elapsed.TotalMilliseconds;
-            Interact.WriteText(ConsoleColor.Red, $" Posortowano w {sortTime} milisekund. Użyty Algorytm: {name}");
-            SaveData();
+            double executeTime = stopWatch.Elapsed.TotalMilliseconds;
+
+            Interact.WriteText(ConsoleColor.Red, $" Sorted in {executeTime} miliseconds. Used Alghoritm: {alghoritmName}");
+
+            SaveAlghoritmData(executeTime);
+
+            PrintDataSet(arrayToPrint);
+        }
+
+        void SaveAlghoritmData(double executeTime)
+        {
+            Records.AddRecord(alghoritmName, executeTime);
+        }
+
+        void PrintDataSet(int[] arrayToPrint)
+        {
             if (settingStatus("ShowSortedData"))
             {
-                Interact.WriteText(ConsoleColor.Red, " Posortowana tablica:");
-                foreach (int i in arrayToWrite)
+                Interact.WriteText(ConsoleColor.Red, " Sorted array:");
+                foreach (int i in arrayToPrint)
                 {
                     Console.Write(i + " ");
                 }
+
                 Console.WriteLine();
+
                 if (settingStatus("ShowOriginalData"))
                 {
-                    DataStorage.PrintOrginalData();
+                    DataStorage.PrintOriginalData();
                 }
             }
-        }
-
-        protected void SaveData()
-        {
-            Records.AddRecord(name, sortTime);
         }
     }
 
@@ -60,49 +67,48 @@ namespace AlgorithmComparisonEngine
     {
         public BubbleSort()
         {
-            name = "Bubble Sort";
-            information = "Informations";
+            alghoritmName = "Bubble Sort";
+            alghoritmInformation = "Stable in-place Alghoritm\n" +
+                                   "Space complexity:\n" +
+                                   " O(1)\n" +
+                                   "Time complexity:\n" +
+                                   " Average - O(n^2)\n" +
+                                   " Best - O(n)\n" +
+                                   " Worst - O(n^2)\n" +
+                                   "Best destiny for the algorithm:\n" +
+                                   " Small data sets - This alghoritm is easy to implement";
             StartSort(DataStorage.TakeData());
         }
 
-        public override void StartSort(int[] arrayToSort)
+        protected override void StartSort(int[] arrayToSort)
         {
+            bool swap;
+
             stopWatch.Reset();
             stopWatch.Start();
-            while (!sorted)
+            do
             {
+                swap = false;
                 for (int i = 0; i < arrayToSort.Length - 1; i++)
                 {
-                    count++;
                     if (ascending)
                     {
                         if (arrayToSort[i] > arrayToSort[i + 1])
                         {
-                            count = 1;
-                            temp = arrayToSort[i + 1];
-                            arrayToSort[i + 1] = arrayToSort[i];
-                            arrayToSort[i] = temp;
+                            Swap(ref arrayToSort[i + 1], ref arrayToSort[i]);
+                            swap = true;
                         }
                     }
                     else
                     {
                         if (arrayToSort[i] < arrayToSort[i + 1])
                         {
-                            count = 1;
-                            temp = arrayToSort[i + 1];
-                            arrayToSort[i + 1] = arrayToSort[i];
-                            arrayToSort[i] = temp;
+                            Swap(ref arrayToSort[i + 1], ref arrayToSort[i]);
+                            swap = true;
                         }
                     }
-
-                    if (count == arrayToSort.Length - 1)
-                    {
-                        count = 1;
-                        sorted = true;
-                    }
                 }
-            }
-            sorted = false;
+            } while (swap);
             stopWatch.Stop();
             InputData(arrayToSort);
         }
@@ -112,15 +118,24 @@ namespace AlgorithmComparisonEngine
     {
         public InsertSort()
         {
-            name = "Insert Sort";
-            information = "Informations";
+            alghoritmName = "Insert Sort";
+            alghoritmInformation = "Stable in-place Alghoritm\n" +
+                                   "Space complexity:\n" +
+                                   " O(1)\n" +
+                                   "Time complexity:\n" +
+                                   " Average - O(n^2)\n" +
+                                   " Best - O(n)\n" +
+                                   " Worst - O(n^2)\n" +
+                                   "Best destiny for the algorithm:\n" +
+                                   " Small data sets - This alghoritm is easy to implement";
             StartSort(DataStorage.TakeData());
         }
-        public override void StartSort(int[] arrayToSort)
+        protected override void StartSort(int[] arrayToSort)
         {
             stopWatch.Reset();
             stopWatch.Start();
             int singleValue;
+            int temp;
             for (int i = 1; i < arrayToSort.Length; i++)
             {
                 temp = i;
@@ -161,20 +176,26 @@ namespace AlgorithmComparisonEngine
     {
         public SelectionSort()
         {
-            name = "Selection Sort";
-            information = "Informations";
+            alghoritmName = "Selection Sort";
+            alghoritmInformation = "In-Stable in-place Alghoritm\n" +
+                                   "Space complexity:\n" +
+                                   " O(1)\n" +
+                                   "Time complexity:\n" +
+                                   " Average - O(n^2)\n" +
+                                   " Best - O(n^2)\n" +
+                                   " Worst - O(n^2)\n" +
+                                   "Best destiny for the algorithm:\n" +
+                                   " Small data sets - This alghoritm is easy to implement, but it has the worst time complexity";
             StartSort(DataStorage.TakeData());
         }
 
-        public override void StartSort(int[] arrayToSort)
+        protected override void StartSort(int[] arrayToSort)
         {
+            int min;
+            int index = 0;
+
             stopWatch.Reset();
             stopWatch.Start();
-
-            int min = 0;
-            int index = 0;
-            int temp = 0;
-
 
             for (int i = 0; i < arrayToSort.Length; i++)
             {
@@ -183,7 +204,7 @@ namespace AlgorithmComparisonEngine
                 {
                     if (ascending)
                     {
-                        if (min >= arrayToSort[j])
+                        if (min > arrayToSort[j])
                         {
                             min = arrayToSort[j];
                             index = j;
@@ -191,16 +212,14 @@ namespace AlgorithmComparisonEngine
                     }
                     else
                     {
-                        if (min <= arrayToSort[j])
+                        if (min < arrayToSort[j])
                         {
                             min = arrayToSort[j];
                             index = j;
                         }
                     }
                 }
-                temp = arrayToSort[i];
-                arrayToSort[i] = min;
-                arrayToSort[index] = temp;
+                Swap(ref arrayToSort[i], ref arrayToSort[index]);
             }
 
             stopWatch.Stop();
@@ -212,39 +231,47 @@ namespace AlgorithmComparisonEngine
     {
         public QuickSort()
         {
-            name = "Quick Sort";
-            information = "Informations";
+            alghoritmName = "Quick Sort";
+            alghoritmInformation = "In-Stable in-place Alghoritm - Uses divide-and-conquern alghoritm\n" +
+                                   "Space complexity:\n" +
+                                   " O(n) or O(log n) - Depends on implementation\n" +
+                                   "Time complexity:\n" +
+                                   " Average - O(n log n)\n" +
+                                   " Best - O(n log n)\n" +
+                                   " Worst - O(n^2)\n" +
+                                   "Best destiny for the algorithm:\n" +
+                                   " Medium/Large data sets - This alghoritm uses recursion and it's moderately difficult to implement.\n It's one of the best sort alghoritms and is used in many libraries";
             StartSort(DataStorage.TakeData());
         }
 
-        public override void StartSort(int[] arrayToSort)
+        protected override void StartSort(int[] arrayToSort)
         {
             stopWatch.Reset();
             stopWatch.Start();
 
-            QuickSortMethod(0, arrayToSort.Length, ref arrayToSort);
+            QuickSortMethod(0, arrayToSort.Length, arrayToSort);
 
             stopWatch.Stop();
             InputData(arrayToSort);
         }
 
-        void QuickSortMethod(int lowestElement, int HighestElement, ref int[] tab)
+        void QuickSortMethod(int lowestElement, int highestElement, int[] tab)
         {
             int min = lowestElement;
-            int max = HighestElement - 1;
-            int size = HighestElement - lowestElement;
+            int max = highestElement - 1;
+            int size = highestElement - lowestElement;
 
             if (size > 1)
             {
-                int compareElement = tab[max];
+                int comparentElement = tab[max];
 
                 while (min < max)
                 {
-                    while (tab[max] > compareElement && max > min)
+                    while (tab[max] > comparentElement && max > min)
                     {
                         max--;
                     }
-                    while (tab[min] < compareElement && min <= max)
+                    while (tab[min] < comparentElement && min <= max)
                     {
                         min++;
                     }
@@ -254,8 +281,8 @@ namespace AlgorithmComparisonEngine
                         min++;
                     }
                 }
-                QuickSortMethod(lowestElement, min, ref tab);
-                QuickSortMethod(max, HighestElement, ref tab);
+                QuickSortMethod(lowestElement, min, tab);
+                QuickSortMethod(max, highestElement, tab);
             }
         }
     }
@@ -264,12 +291,20 @@ namespace AlgorithmComparisonEngine
     {
         public MergeSort()
         {
-            name = "Merge Sort";
-            information = "Informations";
+            alghoritmName = "Merge Sort";
+            alghoritmInformation = "Stable(in most implementations) non-in-place Alghoritm - Uses divide-and-conquern alghoritm\n" +
+                                   "Space complexity:\n" +
+                                   " O(n)\n" +
+                                   "Time complexity:\n" +
+                                   " Average - O(n log n)\n" +
+                                   " Best - O(n log n)\n" +
+                                   " Worst - O(n log n)\n" +
+                                   "Best destiny for the algorithm:\n" +
+                                   " Medium/Large data sets - This alghoritm uses recursion and it's moderately difficult to implement.\n";
             StartSort(DataStorage.TakeData());
         }
 
-        public override void StartSort(int[] arrayToSort)
+        protected override void StartSort(int[] arrayToSort)
         {
             stopWatch.Reset();
             stopWatch.Start();
@@ -280,60 +315,55 @@ namespace AlgorithmComparisonEngine
             InputData(arrayToSort);
         }
 
-        void MergeSortMethod(int left, int right, int[] tab)
+        void MergeSortMethod(int leftPoint, int rightPoint, int[] tab)
         {
-            if (right - left > 1)
+            if (rightPoint - leftPoint > 0)
             {
-                int divide = (left + right) / 2;
-                MergeSortMethod(left, divide, tab);
-                MergeSortMethod(divide + 1, right, tab);
-                Merge(left, divide, right, tab);
+                int middlePoint = (leftPoint + rightPoint) / 2;
+                MergeSortMethod(leftPoint, middlePoint, tab);
+                MergeSortMethod(middlePoint + 1, rightPoint, tab);
+                Merge(leftPoint, middlePoint, rightPoint, tab);
             }
         }
-        void Merge(int left, int mediana, int right, int[] tab)
+        void Merge(int leftPoint, int middlePoint, int rightPoint, int[] tab)
         {
-            int[] temp = new int[(mediana - left + 1) + (right - mediana + 1 + 1)];
+            int[] temp = new int[(middlePoint - leftPoint + 1) + (rightPoint - middlePoint + 1 + 1)];
 
             int index = 0;
-            int startIndex = left;
-            int secStartIndex = mediana + 1;
+            int startIndex = leftPoint;
+            int secondStartIndex = middlePoint + 1;
 
-            while (startIndex <= mediana || secStartIndex <= right)
+            while (startIndex <= middlePoint || secondStartIndex <= rightPoint)
             {
-                if (startIndex <= mediana && secStartIndex <= right)
+                if (startIndex <= middlePoint && secondStartIndex <= rightPoint)
                 {
-                    if (tab[startIndex] <= tab[secStartIndex])
+                    if (tab[startIndex] <= tab[secondStartIndex])
                     {
                         temp[index++] = tab[startIndex++];
                     }
                     else
                     {
-                        temp[index++] = tab[secStartIndex++];
+                        temp[index++] = tab[secondStartIndex++];
                     }
                 }
-                else if (startIndex <= mediana && secStartIndex > right)
+                else if (startIndex <= middlePoint && secondStartIndex > rightPoint)
                 {
                     temp[index++] = tab[startIndex++];
                 }
-                else if (startIndex > mediana && secStartIndex <= right)
+                else if (startIndex > middlePoint && secondStartIndex <= rightPoint)
                 {
-                    temp[index++] = tab[secStartIndex++];
+                    temp[index++] = tab[secondStartIndex++];
                 }
             }
             index = 0;
-            for (startIndex = left; startIndex <= mediana; startIndex++)
+            for (startIndex = leftPoint; startIndex <= middlePoint; startIndex++)
             {
                 tab[startIndex] = temp[index++];
             }
-            for (secStartIndex = mediana + 1; secStartIndex <= right; secStartIndex++)
+            for (secondStartIndex = middlePoint + 1; secondStartIndex <= rightPoint; secondStartIndex++)
             {
-                tab[secStartIndex] = temp[index++];
+                tab[secondStartIndex] = temp[index++];
             }
-        } //# dont works correctly
+        }
     }
 }
-// TODO
-// poszukac sposobu na zmienienie operatora > w zależności od tego jak ma byc sortowane
-// temp i count lokalnie a nie globalnie
-// dodac wyswietlanie dodatkowych informacji
-// StartSort zliczanie czasu i input zrobic w klasie bazowej a w pochodnych zrobić wysyłanie metody jako parametr ?

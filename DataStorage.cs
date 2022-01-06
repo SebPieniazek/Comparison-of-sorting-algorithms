@@ -24,7 +24,7 @@ namespace AlgorithmComparisonEngine
 
         public static void PrintOriginalData()
         {
-            Interact.WriteText(ConsoleColor.Red, " Orginal Data:");
+            Interact.WriteText(ConsoleColor.Red, " Original Data:");
 
             foreach(int i in dataStorage)
             {
