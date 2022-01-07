@@ -6,7 +6,7 @@ namespace AlgorithmComparisonEngine
     {
         static public void ApplicationInfo()
         {
-            WriteText(ConsoleColor.Red, "[Comparison of sorting algorithms] ver. 0.9 by Sebastian Pieniążek");
+            WriteText(ConsoleColor.Red, "[Comparison of sorting algorithms] ver. 0.9.1 BETA by Sebastian Pieniążek");
             Console.WriteLine();
         }
 

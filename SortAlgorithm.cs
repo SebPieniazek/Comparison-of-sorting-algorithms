@@ -27,7 +27,7 @@ namespace AlgorithmComparisonEngine
             second = temp;
         }
 
-        protected void InputData(int[] arrayToPrint)
+        protected void PrintData(int[] arrayToPrint)
         {
             double executeTime = stopWatch.Elapsed.TotalMilliseconds;
 
@@ -121,7 +121,7 @@ namespace AlgorithmComparisonEngine
                 }
             } while (swap);
             stopWatch.Stop();
-            InputData(arrayToSort);
+            PrintData(arrayToSort);
         }
     }
 
@@ -178,7 +178,7 @@ namespace AlgorithmComparisonEngine
                 i = temp;
             }
             stopWatch.Stop();
-            InputData(arrayToSort);
+            PrintData(arrayToSort);
         }
 
     }
@@ -234,7 +234,7 @@ namespace AlgorithmComparisonEngine
             }
 
             stopWatch.Stop();
-            InputData(arrayToSort);
+            PrintData(arrayToSort);
         }
     }
 
@@ -263,7 +263,7 @@ namespace AlgorithmComparisonEngine
             QuickSortMethod(0, arrayToSort.Length, arrayToSort);
 
             stopWatch.Stop();
-            InputData(arrayToSort);
+            PrintData(arrayToSort);
         }
 
         void QuickSortMethod(int lowestElement, int highestElement, int[] tab)
@@ -276,24 +276,48 @@ namespace AlgorithmComparisonEngine
             {
                 int comparentElement = tab[max];
 
-                while (min < max)
+                if (ascending)
                 {
-                    while (tab[max] > comparentElement && max > min)
+                    while (min < max)
                     {
-                        max--;
+                        while (tab[max] > comparentElement && max > min)
+                        {
+                            max--;
+                        }
+                        while (tab[min] < comparentElement && min <= max)
+                        {
+                            min++;
+                        }
+                        if (min < max)
+                        {
+                            Swap(ref tab[min], ref tab[max]);
+                            min++;
+                        }
                     }
-                    while (tab[min] < comparentElement && min <= max)
-                    {
-                        min++;
-                    }
-                    if (min < max)
-                    {
-                        Swap(ref tab[min], ref tab[max]);
-                        min++;
-                    }
+                    QuickSortMethod(lowestElement, min, tab);
+                    QuickSortMethod(max, highestElement, tab);
                 }
-                QuickSortMethod(lowestElement, min, tab);
-                QuickSortMethod(max, highestElement, tab);
+                else
+                {
+                    while (min < max)
+                    {
+                        while (tab[max] < comparentElement && max > min)
+                        {
+                            max--;
+                        }
+                        while (tab[min] > comparentElement && min <= max)
+                        {
+                            min++;
+                        }
+                        if (min < max)
+                        {
+                            Swap(ref tab[min], ref tab[max]);
+                            min++;
+                        }
+                    }
+                    QuickSortMethod(lowestElement, min, tab);
+                    QuickSortMethod(max, highestElement, tab);
+                }
             }
         }
     }
@@ -323,7 +347,7 @@ namespace AlgorithmComparisonEngine
             MergeSortMethod(0, arrayToSort.Length - 1, arrayToSort);
 
             stopWatch.Stop();
-            InputData(arrayToSort);
+            PrintData(arrayToSort);
         }
 
         void MergeSortMethod(int leftPoint, int rightPoint, int[] tab)
@@ -336,7 +360,7 @@ namespace AlgorithmComparisonEngine
                 Merge(leftPoint, middlePoint, rightPoint, tab);
             }
         }
-        void Merge(int leftPoint, int middlePoint, int rightPoint, int[] tab)
+        void Merge(int leftPoint, int middlePoint, int rightPoint, int[] tab) // ugly code, needs to be refactored
         {
             int[] temp = new int[(middlePoint - leftPoint + 1) + (rightPoint - middlePoint + 1 + 1)];
 
@@ -348,13 +372,27 @@ namespace AlgorithmComparisonEngine
             {
                 if (startIndex <= middlePoint && secondStartIndex <= rightPoint)
                 {
-                    if (tab[startIndex] <= tab[secondStartIndex])
+                    if (ascending)
                     {
-                        temp[index++] = tab[startIndex++];
+                        if (tab[startIndex] <= tab[secondStartIndex])
+                        {
+                            temp[index++] = tab[startIndex++];
+                        }
+                        else
+                        {
+                            temp[index++] = tab[secondStartIndex++];
+                        }
                     }
                     else
                     {
-                        temp[index++] = tab[secondStartIndex++];
+                        if (tab[startIndex] >= tab[secondStartIndex])
+                        {
+                            temp[index++] = tab[startIndex++];
+                        }
+                        else
+                        {
+                            temp[index++] = tab[secondStartIndex++];
+                        }
                     }
                 }
                 else if (startIndex <= middlePoint && secondStartIndex > rightPoint)
@@ -377,4 +415,5 @@ namespace AlgorithmComparisonEngine
             }
         }
     }
-}
+}// #TODO
+ // - The DRY rules were broken, need to be fixed.
