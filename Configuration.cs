@@ -63,6 +63,8 @@ namespace AlgorithmComparisonEngine
                 }
             } while (!userExit);
         }
+
+        // It shows the status of the options for the user on the left side of the console, if enabled - GREEN if disabled - RED
         void ShowSettingStatus(bool option)
         {
             Console.CursorLeft = Console.BufferWidth - 4;
@@ -82,6 +84,7 @@ namespace AlgorithmComparisonEngine
             Console.ResetColor();
         }
 
+        // Changes the state of options in the app.config file.
         void ChangeSettingStatus(string name)
         {
             if (ConfigurationManager.AppSettings.Get(name) == "true")

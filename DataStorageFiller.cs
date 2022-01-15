@@ -57,8 +57,9 @@ namespace AlgorithmComparisonEngine
             }
             return true;
         }
-            // It's adds values to dataStorage array. String builder is used to manipulate string and for faster data convert.
-            void ChangeStringToInt(string strToChange)
+        // It's adds values to dataStorage array. String builder is used to manipulate string and for faster data convert.
+        // This can be done with String.Split(), but I wanted to do it myself and used Stringbuilder - String.Split() is commented bellow StringBuilder code.
+        void ChangeStringToInt(string strToChange)
         {
             bool end = false;
             bool addToBuilder = false;
@@ -114,9 +115,32 @@ namespace AlgorithmComparisonEngine
                 Interact.WriteText(ConsoleColor.DarkRed, "Not enought values !");
                 DataStorage.dataStorageFilled = false;
             }
+            //Same code done with String.Split() - It's a little faster.
+            /*
+            if (checkMinOutput(dataStorage.Length))
+            {
+                dataStorage = new int[DeclareDateStorageSize(strToChange)];
+                string[] storage = strToChange.Split(' ');
+                for (int i = 0; i < storage.Length; i++)
+                {
+                    if (!String.IsNullOrEmpty(storage[i]))
+                    {
+                        dataStorage[i] = int.Parse(storage[i]);
+                    }
+                }
+
+                DataStorage.SaveData(dataStorage);
+            }
+            else 
+            {
+                Interact.WriteText(ConsoleColor.DarkRed, "Not enought values !");
+                DataStorage.dataStorageFilled = false;
+            }
+            */
         }
 
         // Declare the size of the data storage by counting spaces in string.
+        // This is done for better optimization, it also protects aganist 0's in the array and from out of range exceptions.
         int DeclareDateStorageSize(string str)
         {
             int dataStorageSize = 1;
