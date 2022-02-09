@@ -1,9 +1,11 @@
-﻿using System;
+﻿using AlgorithmComparisonEngine.Data;
+using AlgorithmComparisonEngine.Data.Filler;
+using AlgorithmComparisonEngine.SortAlgorithms;
+using System;
 using System.Configuration;
 
 namespace AlgorithmComparisonEngine
 {
-
     class Program
     {
         static readonly Func<string, bool> settingStatus = settingName => ConfigurationManager.AppSettings.Get(settingName) == "true";
@@ -23,7 +25,7 @@ namespace AlgorithmComparisonEngine
                         AlghoritmSelectionMenu();
                         break;
                     case 2:
-                        Records.ShowRecords();
+                        SortRecords.ShowRecords();
                         break;
                     case 3:
                         _ = new Configuration();
@@ -50,7 +52,7 @@ namespace AlgorithmComparisonEngine
             {
                 Console.Clear();
                 Interact.WriteText(ConsoleColor.Green, " Which algorithm you want to use ?\n  1. Bubble sort\n  2. Insert sort\n" +
-                                                       "  3. Selection sort\n  4. Quick sort\n  5. Merge sort\n  6. Inser new data\n  7. Return");
+                                                       "  3. Selection sort\n  4. Quick sort\n  5. Merge sort\n  6. Insert new data\n  7. Return");
 
                 switch (Interact.TakeUserOutput(7))
                 {
@@ -71,7 +73,7 @@ namespace AlgorithmComparisonEngine
                         break;
                     case 6:
                         FillDataStorage();
-                        Records.RemoveRecords();
+                        SortRecords.RemoveRecords();
                         break;
                     case 7:
                         repeat = false;
@@ -80,7 +82,7 @@ namespace AlgorithmComparisonEngine
 
                 if (settingStatus("CompareAfterEveryUse"))
                 {
-                    Records.ShowRecords();
+                    SortRecords.ShowRecords();
                 }
 
                 if (repeat)

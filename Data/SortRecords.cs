@@ -2,9 +2,9 @@
 using System.Threading;
 using System.Collections.Generic;
 
-namespace AlgorithmComparisonEngine
+namespace AlgorithmComparisonEngine.Data
 {
-    static class Records
+    static class SortRecords
     {
         private static int Id { get; set; } = 1;
         private record AlgorithmData(int Id, string AlghoritmName, double ExecuteTime);
