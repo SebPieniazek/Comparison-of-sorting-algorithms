@@ -6,6 +6,7 @@ using System.Configuration;
 
 namespace AlgorithmComparisonEngine
 {
+    //I use this class to control program.
     class Program
     {
         static readonly Func<string, bool> settingStatus = settingName => ConfigurationManager.AppSettings.Get(settingName) == "true";
@@ -17,7 +18,12 @@ namespace AlgorithmComparisonEngine
                 Console.Clear();
 
                 Interact.ApplicationInfo();
-                Interact.WriteText(ConsoleColor.DarkGreen, " 1. Select Alghoritm \n 2. Compare already used alghoritms \n 3. Configuration \n 4. Exit");
+                Interact.WriteText(ConsoleColor.DarkGreen,
+                    " MENU: \n" +
+                    " 1. Select Alghoritm \n" +
+                    " 2. Compare already used alghoritms \n" +
+                    " 3. Configuration \n" +
+                    " 4. Exit");
 
                 switch (Interact.TakeUserOutput(4))
                 {
@@ -51,8 +57,15 @@ namespace AlgorithmComparisonEngine
             do
             {
                 Console.Clear();
-                Interact.WriteText(ConsoleColor.Green, " Which algorithm you want to use ?\n  1. Bubble sort\n  2. Insert sort\n" +
-                                                       "  3. Selection sort\n  4. Quick sort\n  5. Merge sort\n  6. Insert new data\n  7. Return");
+                Interact.WriteText(ConsoleColor.Green,
+                    " Which algorithm you want to use ?\n " +
+                    " 1. Bubble sort\n " +
+                    " 2. Insert sort\n " +
+                    " 3. Selection sort\n " +
+                    " 4. Quick sort\n " +
+                    " 5. Merge sort\n " +
+                    " 6. Insert new data\n " +
+                    " 7. Return");
 
                 switch (Interact.TakeUserOutput(7))
                 {
@@ -87,7 +100,10 @@ namespace AlgorithmComparisonEngine
 
                 if (repeat)
                 {
-                    Interact.WriteText(ConsoleColor.Green, " Do you want to select the next sorting alghoritm ? \n 1. Yes \n 2. No");
+                    Interact.WriteText(ConsoleColor.Green,
+                        " Do you want to select the next sorting alghoritm ? \n " +
+                        " 1. Yes \n " +
+                        " 2. No");
                     repeat = (Interact.TakeUserOutput(2) == 1);
                 }
 

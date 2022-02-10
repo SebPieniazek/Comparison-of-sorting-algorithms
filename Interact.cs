@@ -2,6 +2,8 @@
 
 namespace AlgorithmComparisonEngine
 {
+
+    //Global helper class for user interaction.
     static class Interact
     {
         static public void ApplicationInfo()
@@ -36,7 +38,6 @@ namespace AlgorithmComparisonEngine
                     goodChoice = false;
                     WriteText(ConsoleColor.Red, " Enter the number of the selected option !");
                 }
-                
                 if (goodChoice == true && (userChoice > maxChoice || userChoice < 1))
                 {
                     WriteText(ConsoleColor.Red, " Enter the number of the selected option !");

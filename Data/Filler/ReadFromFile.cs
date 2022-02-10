@@ -16,8 +16,14 @@ namespace AlgorithmComparisonEngine.Data.Filler
             string fileData = "";
             bool correctData = false;
 
-            Interact.WriteText(ConsoleColor.Magenta, " How do you want to upload the data?\n  1. Insert file path \n  2. Insert file name(file should be in Project folder)");
-            Interact.WriteText(ConsoleColor.DarkRed, "\n The maximum length of a single value is 10 digits !\n Compartment 2-10000\n A single value should be separated by ' ' space.");
+            Interact.WriteText(ConsoleColor.Magenta, 
+                " How do you want to upload the data?\n" +
+                "  1. Insert file path \n" +
+                "  2. Insert file name(file should be in Project folder)\n");
+            Interact.WriteText(ConsoleColor.DarkRed,
+                " The maximum length of a single value is 10 digits !\n" +
+                " Compartment 2-10000\n" +
+                " A single value should be separated by ' ' space.");
 
             do
             {

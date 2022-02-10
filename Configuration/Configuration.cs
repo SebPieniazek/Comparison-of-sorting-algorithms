@@ -64,7 +64,7 @@ namespace AlgorithmComparisonEngine
             } while (!userExit);
         }
 
-        // It shows the status of the options for the user on the left side of the console, if enabled - GREEN if disabled - RED
+        // It shows the status of the options for the user on the right side of the console, if enabled - GREEN if disabled - RED
         void ShowSettingStatus(bool option)
         {
             Console.CursorLeft = Console.BufferWidth - 4;

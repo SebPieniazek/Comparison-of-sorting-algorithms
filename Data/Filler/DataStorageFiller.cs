@@ -18,7 +18,11 @@ namespace AlgorithmComparisonEngine.Data.Filler
 
         void TakeDigitsFromUser()
         {
-            Interact.WriteText(ConsoleColor.Magenta, " Which method do you want to choose for delivering numbers? \n  1. Draw \n  2. Write on console \n  3. Upload file");
+            Interact.WriteText(ConsoleColor.Magenta, 
+                " Which method do you want to choose for delivering numbers? \n" +
+                "  1. Draw \n" +
+                "  2. Write on console \n" +
+                "  3. Upload file");
 
             switch (Interact.TakeUserOutput(3))
             {
@@ -57,7 +61,7 @@ namespace AlgorithmComparisonEngine.Data.Filler
             return true;
         }
         // It's adds values to dataStorage array. String builder is used to manipulate string and for faster data convert.
-        // This can be done with String.Split(), but I wanted to do it myself and used Stringbuilder - String.Split() is commented bellow StringBuilder code.
+        // This can be done with String.Split(), but I wanted to do it myself and use Stringbuilder - String.Split() is commented bellow StringBuilder code.
         protected void ChangeStringToInt(string strToChange)
         {
             bool end = false;
@@ -115,6 +119,7 @@ namespace AlgorithmComparisonEngine.Data.Filler
                 DataStorage.dataStorageFilled = false;
             }
             //Same code done with String.Split() - It's a little faster.
+
             /*
             if (checkMinOutput(dataStorage.Length))
             {

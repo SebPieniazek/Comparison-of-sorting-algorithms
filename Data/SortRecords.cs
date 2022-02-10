@@ -4,12 +4,13 @@ using System.Collections.Generic;
 
 namespace AlgorithmComparisonEngine.Data
 {
+    // In this class the program stores a set of records, each record represents one use of the sort algorithm.
     static class SortRecords
     {
         private static int Id { get; set; } = 1;
         private record AlgorithmData(int Id, string AlghoritmName, double ExecuteTime);
 
-        private static readonly List<AlgorithmData> algorithmsData = new List<AlgorithmData>();
+        private static List<AlgorithmData> algorithmsData = new List<AlgorithmData>();
 
         public static void AddRecord(string alghoritmName, double executeTime)
         {
@@ -25,7 +26,7 @@ namespace AlgorithmComparisonEngine.Data
 
         public static void ShowRecords()
         {
-            if (Id >= 2)
+            if (Id > 1)
             {
                 foreach (var record in algorithmsData)
                 {

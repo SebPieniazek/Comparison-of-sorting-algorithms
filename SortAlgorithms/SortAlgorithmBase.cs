@@ -21,6 +21,7 @@ namespace AlgorithmComparisonEngine
 
         protected abstract void StartSort(int[] arrayToSort);
 
+        // It uses ref because there is posibility to use it in the future for value types.
         protected void Swap(ref int first, ref int second)
         {
             int temp = first;
