@@ -2,14 +2,14 @@
 
 namespace AlgorithmComparisonEngine.Data.Filler
 {
-    class TypeValues : DataStorageFiller
+    internal class TypeValues : DataStorageFiller
     {
         public TypeValues()
         {
             ChangeStringToInt(AskUserForDigits());
         }
 
-        string AskUserForDigits()
+        private string AskUserForDigits()
         {
             string userOutput;
             bool goodOutput;

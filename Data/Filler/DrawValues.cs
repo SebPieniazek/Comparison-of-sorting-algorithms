@@ -2,16 +2,17 @@
 
 namespace AlgorithmComparisonEngine.Data.Filler
 {
-    class DrawValues : DataStorageFiller
+    internal class DrawValues : DataStorageFiller
     {
         public DrawValues()
         {
             int userOutput;
+            int maxDigits = 10000;
 
             do
             {
                 Interact.WriteText(ConsoleColor.Magenta, " How much digits you want to draw ? (compartment 2-10000)");
-                userOutput = Interact.TakeUserOutput(10000);
+                userOutput = Interact.TakeUserOutput(maxDigits);
             }
             while (!checkMinOutput(userOutput));
 
@@ -22,12 +23,15 @@ namespace AlgorithmComparisonEngine.Data.Filler
             DataStorage.SaveData(dataStorage);
         }
 
-        void Draw()
+        private void Draw()
         {
             Random rnd = new Random();
+            int minDigit = -10000;
+            int maxDigit = 10000;
+
             for (int i = 0; i < dataStorage.Length - 1; i++)
             {
-                dataStorage[i] = rnd.Next(-10000, 10000);
+                dataStorage[i] = rnd.Next(minDigit, maxDigit);
             }
         }
     }

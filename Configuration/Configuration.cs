@@ -3,16 +3,16 @@ using System.Configuration;
 
 namespace AlgorithmComparisonEngine
 {
-    class Configuration
+    public class Configuration
     {
-        readonly Func<string, bool> settingStatus = settingName => ConfigurationManager.AppSettings.Get(settingName) == "true";
+        public static readonly Func<string, bool> settingStatus = settingName => ConfigurationManager.AppSettings.Get(settingName) == "true";
 
         public Configuration()
         {
             ConfigurationMenu();
         }
 
-        void ConfigurationMenu()
+        private void ConfigurationMenu()
         {
             bool userExit = false;
 
@@ -65,11 +65,11 @@ namespace AlgorithmComparisonEngine
         }
 
         // It shows the status of the options for the user on the right side of the console, if enabled - GREEN if disabled - RED
-        void ShowSettingStatus(bool option)
+        private void ShowSettingStatus(bool settingStatus)
         {
             Console.CursorLeft = Console.BufferWidth - 4;
 
-            if (option)
+            if (settingStatus)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("ON");
@@ -85,15 +85,15 @@ namespace AlgorithmComparisonEngine
         }
 
         // Changes the state of options in the app.config file.
-        void ChangeSettingStatus(string name)
+        private void ChangeSettingStatus(string settingName)
         {
-            if (ConfigurationManager.AppSettings.Get(name) == "true")
+            if (ConfigurationManager.AppSettings.Get(settingName) == "true")
             {
-                ConfigurationManager.AppSettings.Set(name, "false");
+                ConfigurationManager.AppSettings.Set(settingName, "false");
             }
             else
             {
-                ConfigurationManager.AppSettings.Set(name, "true");
+                ConfigurationManager.AppSettings.Set(settingName, "true");
             }
         }
 

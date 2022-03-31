@@ -1,6 +1,6 @@
 ﻿namespace AlgorithmComparisonEngine.SortAlgorithms
 {
-    class SelectionSort : SortAlgorithmBase
+    internal class SelectionSort : SortAlgorithmBase
     {
         public SelectionSort()
         {
@@ -14,6 +14,7 @@
                                    " Worst - O(n^2)\n" +
                                    "Best destiny for the algorithm:\n" +
                                    " Small data sets - This alghoritm is easy to implement, but it has the worst time complexity\n";
+
             StartSort(DataStorage.TakeData());
         }
 

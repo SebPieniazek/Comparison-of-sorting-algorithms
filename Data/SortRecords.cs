@@ -10,12 +10,11 @@ namespace AlgorithmComparisonEngine.Data
         private static int Id { get; set; } = 1;
         private record AlgorithmData(int Id, string AlghoritmName, double ExecuteTime);
 
-        private static List<AlgorithmData> algorithmsData = new List<AlgorithmData>();
+        private readonly static List<AlgorithmData> algorithmsData = new List<AlgorithmData>();
 
         public static void AddRecord(string alghoritmName, double executeTime)
         {
-            algorithmsData.Add(new AlgorithmData(Id, alghoritmName, executeTime));
-            Id++;
+            algorithmsData.Add(new AlgorithmData(Id++, alghoritmName, executeTime));
         }
 
         public static void RemoveRecords()

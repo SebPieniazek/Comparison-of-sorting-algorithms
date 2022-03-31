@@ -2,16 +2,13 @@
 using AlgorithmComparisonEngine.Data.Filler;
 using AlgorithmComparisonEngine.SortAlgorithms;
 using System;
-using System.Configuration;
 
 namespace AlgorithmComparisonEngine
 {
     //I use this class to control program.
     class Program
     {
-        static readonly Func<string, bool> settingStatus = settingName => ConfigurationManager.AppSettings.Get(settingName) == "true";
-
-        static void Main()
+        static private void Main()
         {
             do
             {
@@ -45,7 +42,7 @@ namespace AlgorithmComparisonEngine
 
         }
 
-        static void AlghoritmSelectionMenu()
+        static private void AlghoritmSelectionMenu()
         {
             bool repeat = true;
 
@@ -93,7 +90,7 @@ namespace AlgorithmComparisonEngine
                         break;
                 }
 
-                if (settingStatus("CompareAfterEveryUse"))
+                if (Configuration.settingStatus("CompareAfterEveryUse"))
                 {
                     SortRecords.ShowRecords();
                 }
@@ -110,7 +107,7 @@ namespace AlgorithmComparisonEngine
             } while (repeat);
         }
 
-        static void FillDataStorage()
+        static private void FillDataStorage()
         {
             do
             {

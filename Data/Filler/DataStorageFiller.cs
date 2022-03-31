@@ -3,7 +3,7 @@ using System.Text;
 
 namespace AlgorithmComparisonEngine.Data.Filler
 {
-    class DataStorageFiller
+    internal class DataStorageFiller
     {
         protected int[] dataStorage;
         protected readonly Func<int, bool> checkMinOutput = userOutput => userOutput > 1;
@@ -16,15 +16,16 @@ namespace AlgorithmComparisonEngine.Data.Filler
             }
         }
 
-        void TakeDigitsFromUser()
+        private void TakeDigitsFromUser()
         {
+            int maxchoice = 3;
             Interact.WriteText(ConsoleColor.Magenta, 
                 " Which method do you want to choose for delivering numbers? \n" +
                 "  1. Draw \n" +
                 "  2. Write on console \n" +
                 "  3. Upload file");
 
-            switch (Interact.TakeUserOutput(3))
+            switch (Interact.TakeUserOutput(maxchoice))
             {
                 case 1:
                     {
@@ -46,7 +47,7 @@ namespace AlgorithmComparisonEngine.Data.Filler
 
         protected bool IsDigitsOnly(string str)
         {
-            for (int i = 0; i < str.Length - 1; i++)
+            for (int i = 0; i < str.Length; i++)
             {
                 if ((str[i] < '0' || '9' < str[i]) && str[i] != ' ' && str[i] != '-')
                 {
@@ -145,11 +146,11 @@ namespace AlgorithmComparisonEngine.Data.Filler
 
         // Declare the size of the data storage by counting spaces in string.
         // This is done for better optimization, it also protects aganist 0's in the array and from out of range exceptions.
-        int DeclareDateStorageSize(string str)
+        private int DeclareDateStorageSize(string str)
         {
             int dataStorageSize = 1;
 
-            for (int i = 0; i < str.Length - 1; i++)
+            for (int i = 0; i < str.Length; i++)
             {
                 if ((str[i] == ' ') && (str[i + 1] != ' '))
                 {

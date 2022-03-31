@@ -1,6 +1,6 @@
 ﻿namespace AlgorithmComparisonEngine.SortAlgorithms
 {
-    class QuickSort : SortAlgorithmBase
+    internal class QuickSort : SortAlgorithmBase
     {
         public QuickSort()
         {
@@ -13,7 +13,9 @@
                                    " Best - O(n log n)\n" +
                                    " Worst - O(n^2)\n" +
                                    "Best destiny for the algorithm:\n" +
-                                   " Medium/Large data sets - This alghoritm uses recursion and it's moderately difficult to implement.\n It's one of the best sort alghoritms and is used in many libraries\n";
+                                   " Medium/Large data sets - This alghoritm uses recursion and it's moderately difficult to implement.\n" +
+                                   " It's one of the best sort alghoritms and is used in many libraries\n";
+
             StartSort(DataStorage.TakeData());
         }
 
@@ -28,7 +30,7 @@
             PrintData(arrayToSort);
         }
 
-        void QuickSortMethod(int lowestElement, int highestElement, int[] tab)
+        private void QuickSortMethod(int lowestElement, int highestElement, int[] tab)
         {
             int min = lowestElement;
             int max = highestElement - 1;
@@ -56,6 +58,7 @@
                             min++;
                         }
                     }
+
                     QuickSortMethod(lowestElement, min, tab);
                     QuickSortMethod(max, highestElement, tab);
                 }
@@ -77,6 +80,7 @@
                             min++;
                         }
                     }
+
                     QuickSortMethod(lowestElement, min, tab);
                     QuickSortMethod(max, highestElement, tab);
                 }

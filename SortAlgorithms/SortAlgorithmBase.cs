@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Configuration;
 using AlgorithmComparisonEngine.Data;
 
 namespace AlgorithmComparisonEngine
 {
     abstract class SortAlgorithmBase
     {
-        readonly Func<string, bool> settingStatus = settingName => ConfigurationManager.AppSettings.Get(settingName) == "true";
-        protected Stopwatch stopWatch = new Stopwatch();
+        protected Stopwatch stopWatch;
 
         protected string alghoritmName;
         protected string alghoritmInformation;
@@ -16,12 +14,14 @@ namespace AlgorithmComparisonEngine
 
         public SortAlgorithmBase()
         {
-            ascending = settingStatus("AscendingOrder");
+            stopWatch = new Stopwatch();
+
+            ascending = Configuration.settingStatus("AscendingOrder");
         }
 
         protected abstract void StartSort(int[] arrayToSort);
 
-        // It uses ref because there is posibility to use it in the future for value types.
+        // It uses ref to swap value types without returning anything.
         protected void Swap(ref int first, ref int second)
         {
             int temp = first;
@@ -42,23 +42,23 @@ namespace AlgorithmComparisonEngine
             PrintDataSet(arrayToPrint);
         }
 
-        void SaveAlghoritmData(double executeTime)
+        private void SaveAlghoritmData(double executeTime)
         {
             SortRecords.AddRecord(alghoritmName, executeTime);
         }
 
-        void PrintInformation()
+        private void PrintInformation()
         {
-            if (settingStatus("AdditionalInfo"))
+            if (Configuration.settingStatus("AdditionalInfo"))
             {
                 Console.WriteLine();
                 Interact.WriteText(ConsoleColor.Green, alghoritmInformation);
             }
         }
 
-        void PrintDataSet(int[] arrayToPrint)
+        private void PrintDataSet(int[] arrayToPrint)
         {
-            if (settingStatus("ShowSortedData"))
+            if (Configuration.settingStatus("ShowSortedData"))
             {
                 Interact.WriteText(ConsoleColor.Red, " Sorted array:");
                 foreach (int i in arrayToPrint)
@@ -68,7 +68,7 @@ namespace AlgorithmComparisonEngine
 
                 Console.WriteLine();
 
-                if (settingStatus("ShowOriginalData"))
+                if (Configuration.settingStatus("ShowOriginalData"))
                 {
                     DataStorage.PrintOriginalData();
                 }

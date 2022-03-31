@@ -1,6 +1,6 @@
 ﻿namespace AlgorithmComparisonEngine.SortAlgorithms
 {
-    class BubbleSort : SortAlgorithmBase
+    internal class BubbleSort : SortAlgorithmBase
     {
         public BubbleSort()
         {
@@ -14,6 +14,7 @@
                                    " Worst - O(n^2)\n" +
                                    "Best destiny for the algorithm:\n" +
                                    " Small data sets - This alghoritm is easy to implement\n";
+
             StartSort(DataStorage.TakeData());
         }
 
@@ -46,6 +47,7 @@
                     }
                 }
             } while (swap);
+
             stopWatch.Stop();
             PrintData(arrayToSort);
         }

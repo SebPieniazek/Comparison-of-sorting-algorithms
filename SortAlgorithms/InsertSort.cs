@@ -1,6 +1,6 @@
 ﻿namespace AlgorithmComparisonEngine.SortAlgorithms
 {
-    class InsertSort : SortAlgorithmBase
+    internal class InsertSort : SortAlgorithmBase
     {
         public InsertSort()
         {
@@ -14,14 +14,17 @@
                                    " Worst - O(n^2)\n" +
                                    "Best destiny for the algorithm:\n" +
                                    " Small data sets - This alghoritm is easy to implement\n";
+
             StartSort(DataStorage.TakeData());
         }
         protected override void StartSort(int[] arrayToSort)
         {
             stopWatch.Reset();
             stopWatch.Start();
+
             int singleValue;
             int temp;
+
             for (int i = 1; i < arrayToSort.Length; i++)
             {
                 temp = i;
@@ -52,6 +55,7 @@
                 }
                 i = temp;
             }
+
             stopWatch.Stop();
             PrintData(arrayToSort);
         }

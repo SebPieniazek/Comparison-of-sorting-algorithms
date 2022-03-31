@@ -3,14 +3,14 @@ using System.IO;
 
 namespace AlgorithmComparisonEngine.Data.Filler
 {
-    class ReadFromFile : DataStorageFiller
+    internal class ReadFromFile : DataStorageFiller
     {
         public ReadFromFile()
         {
             AskUserForFile();
         }
 
-        void AskUserForFile()
+        private void AskUserForFile()
         {
             string filePath;
             string fileData = "";
@@ -51,7 +51,7 @@ namespace AlgorithmComparisonEngine.Data.Filler
             ChangeStringToInt(fileData);
         }
 
-        string TakeFilePathFromUser()
+        private string TakeFilePathFromUser()
         {
             string filePath;
 
@@ -63,7 +63,7 @@ namespace AlgorithmComparisonEngine.Data.Filler
             return filePath;
         }
 
-        string TakeFileNameFromUser()
+        private string TakeFileNameFromUser()
         {
             string fileName;
             string filePath = Environment.CurrentDirectory;
@@ -85,7 +85,7 @@ namespace AlgorithmComparisonEngine.Data.Filler
             return filePath;
         }
 
-        string CheckFilePath(string file)
+        private string CheckFilePath(string file)
         {
             if (!file.EndsWith(@".txt"))
             {
